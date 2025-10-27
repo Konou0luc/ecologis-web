@@ -1,0 +1,188 @@
+/* Admin Theme - Classes CSS spécifiques pour éviter les conflits */
+
+/* Variables CSS locales pour l'admin */
+.admin-app {
+  --admin-primary: #6366f1;
+  --admin-primary-hover: #4f46e5;
+  --admin-primary-light: #818cf8;
+  --admin-primary-dark: #4338ca;
+  --admin-background: #0f0f0f;
+  --admin-card: #1a1a1a;
+  --admin-border: #333333;
+  --admin-text-primary: #ffffff;
+  --admin-text-secondary: #cccccc;
+  --admin-text-tertiary: #999999;
+  --admin-success: #22c55e;
+  --admin-warning: #f59e0b;
+  --admin-error: #ef4444;
+  --admin-info: #3b82f6;
+}
+
+/* Boutons admin avec couleurs spécifiques - Classes spécifiques */
+.admin-app .btn-admin-primary {
+  background-color: var(--admin-primary) !important;
+  color: white !important;
+  border-color: var(--admin-primary) !important;
+}
+
+.admin-app .btn-admin-primary:hover {
+  background-color: var(--admin-primary-hover) !important;
+  border-color: var(--admin-primary-hover) !important;
+}
+
+/* Override spécifique pour les boutons admin existants */
+.admin-app .profile-section .btn-primary,
+.admin-app .settings-section .btn-primary,
+.admin-app .security-btn,
+.admin-app .edit-btn,
+.admin-app .save-btn {
+  background-color: var(--admin-primary) !important;
+  color: white !important;
+  border-color: var(--admin-primary) !important;
+}
+
+.admin-app .profile-section .btn-primary:hover,
+.admin-app .settings-section .btn-primary:hover,
+.admin-app .security-btn:hover,
+.admin-app .edit-btn:hover,
+.admin-app .save-btn:hover {
+  background-color: var(--admin-primary-hover) !important;
+  border-color: var(--admin-primary-hover) !important;
+}
+
+/* Inputs admin */
+.admin-app input:focus,
+.admin-app select:focus,
+.admin-app textarea:focus {
+  border-color: var(--admin-primary) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Cartes admin */
+.admin-app .card,
+.admin-app .stat-card,
+.admin-app .settings-section,
+.admin-app .profile-section {
+  border-color: var(--admin-border) !important;
+  background-color: var(--admin-card) !important;
+}
+
+.admin-app .card:hover,
+.admin-app .stat-card:hover,
+.admin-app .settings-section:hover,
+.admin-app .profile-section:hover {
+  border-color: var(--admin-primary) !important;
+}
+
+/* Liens admin */
+.admin-app a {
+  color: var(--admin-text-primary) !important;
+}
+
+.admin-app a:hover {
+  color: var(--admin-primary) !important;
+}
+
+/* Icônes admin */
+.admin-app svg {
+  color: var(--admin-text-secondary) !important;
+}
+
+.admin-app .icon-primary svg {
+  color: var(--admin-primary) !important;
+}
+
+/* Badges admin */
+.admin-app .badge-primary {
+  background-color: var(--admin-primary) !important;
+  color: white !important;
+}
+
+.admin-app .badge-success {
+  background-color: var(--admin-success) !important;
+  color: white !important;
+}
+
+.admin-app .badge-warning {
+  background-color: var(--admin-warning) !important;
+  color: white !important;
+}
+
+.admin-app .badge-error {
+  background-color: var(--admin-error) !important;
+  color: white !important;
+}
+
+/* Indicateurs de statut admin */
+.admin-app .status-online {
+  background-color: var(--admin-success) !important;
+}
+
+.admin-app .status-warning {
+  background-color: var(--admin-warning) !important;
+}
+
+.admin-app .status-error {
+  background-color: var(--admin-error) !important;
+}
+
+.admin-app .status-info {
+  background-color: var(--admin-info) !important;
+}
+
+/* Override spécifique pour les composants admin */
+.admin-app .edit-btn,
+.admin-app .save-btn,
+.admin-app .security-btn {
+  background: var(--admin-primary) !important;
+  color: white !important;
+}
+
+.admin-app .edit-btn:hover,
+.admin-app .save-btn:hover,
+.admin-app .security-btn:hover {
+  background: var(--admin-primary-hover) !important;
+}
+
+/* Override pour les sections de profil */
+.admin-app .profile-header {
+  background: var(--admin-card) !important;
+  border-color: var(--admin-border) !important;
+}
+
+.admin-app .section-header h3 {
+  color: var(--admin-text-primary) !important;
+}
+
+.admin-app .section-header svg {
+  color: var(--admin-primary) !important;
+}
+
+/* Override pour les formulaires admin */
+.admin-app .form-group input,
+.admin-app .form-group select {
+  background: var(--admin-background) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text-primary) !important;
+}
+
+.admin-app .form-group input:focus,
+.admin-app .form-group select:focus {
+  border-color: var(--admin-primary) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Override pour les alertes admin */
+.admin-app .alert {
+  background: var(--admin-card) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text-primary) !important;
+}
+
+.admin-app .alert.success {
+  border-left-color: var(--admin-success) !important;
+}
+
+.admin-app .alert.error {
+  border-left-color: var(--admin-error) !important;
+}

@@ -1,0 +1,243 @@
+/* Notification Styles */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 320px;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  cursor: pointer;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 4px solid;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.notification.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification.leaving {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 12px;
+}
+
+.notification-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+.notification-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.notification-message {
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+.notification-close {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  opacity: 0.6;
+}
+
+.notification-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+.notification-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.notification-progress-bar {
+  height: 100%;
+  background: currentColor;
+  width: 100%;
+  transform-origin: left;
+  animation: notification-progress linear forwards;
+}
+
+/* Notification Types */
+.notification.success {
+  border-left-color: #10b981;
+  color: #065f46;
+}
+
+.notification.success .notification-icon {
+  background: #d1fae5;
+  color: #10b981;
+}
+
+.notification.error {
+  border-left-color: #ef4444;
+  color: #991b1b;
+}
+
+.notification.error .notification-icon {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.notification.warning {
+  border-left-color: #f59e0b;
+  color: #92400e;
+}
+
+.notification.warning .notification-icon {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.notification.info {
+  border-left-color: #3b82f6;
+  color: #1e40af;
+}
+
+.notification.info .notification-icon {
+  background: #dbeafe;
+  color: #3b82f6;
+}
+
+/* Animations */
+@keyframes notification-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Dark mode support */
+[data-theme='dark'] .notification {
+  background: #1f2937;
+  color: #f9fafb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .notification-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .notification-progress {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+    max-width: none;
+  }
+  
+  .notification-content {
+    padding: 12px;
+  }
+  
+  .notification-title {
+    font-size: 13px;
+  }
+  
+  .notification-message {
+    font-size: 12px;
+  }
+}
+
+/* Multiple notifications */
+.notification + .notification {
+  top: calc(20px + 80px);
+}
+
+.notification + .notification + .notification {
+  top: calc(20px + 160px);
+}
+
+.notification + .notification + .notification + .notification {
+  top: calc(20px + 240px);
+}
+
+/* Notifications sur la page de login */
+.modern-login-container .notification {
+  top: 30px;
+  right: 30px;
+  z-index: 10001;
+}
+
+/* Animation d'entrée plus fluide */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.notification.visible {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.notification.leaving {
+  animation: slideOutRight 0.3s ease-in;
+}

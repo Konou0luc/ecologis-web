@@ -1,0 +1,491 @@
+/* Modern Login Design */
+.modern-login-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* Left Section - Form */
+.login-left-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 40px;
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  background: #111827;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.brand-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.welcome-section {
+  margin-bottom: 32px;
+}
+
+.welcome-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.modern-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.modern-input {
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #111827;
+}
+
+.forgot-password {
+  font-size: 14px;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forgot-password:hover {
+  color: #111827;
+}
+
+.modern-signin-btn {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.modern-signin-btn:hover:not(:disabled) {
+  background: #0f172a;
+  transform: translateY(-1px);
+}
+
+.modern-signin-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-footer-link {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.signup-link {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+/* Right Section - Illustration */
+.login-right-section {
+  flex: 1;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.illustration-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Floating Character */
+.floating-character {
+  position: absolute;
+  left: 20%;
+  top: 30%;
+  z-index: 3;
+  animation: float 3s ease-in-out infinite;
+}
+
+.character-body {
+  position: relative;
+  width: 80px;
+  height: 120px;
+}
+
+.character-head {
+  width: 40px;
+  height: 40px;
+  background: #fbbf24;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+.character-torso {
+  width: 60px;
+  height: 60px;
+  background: #fbbf24;
+  border-radius: 8px;
+  position: absolute;
+  top: 35px;
+  left: 10px;
+}
+
+.character-bag {
+  width: 20px;
+  height: 30px;
+  background: #1f2937;
+  border-radius: 4px;
+  position: absolute;
+  top: 40px;
+  left: 0;
+}
+
+/* Smartphone */
+.smartphone-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.smartphone {
+  width: 200px;
+  height: 350px;
+  background: #1f2937;
+  border-radius: 30px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fingerprint-icon {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.fingerprint-animation {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.scan-circle {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #111827;
+  border-radius: 50%;
+  position: absolute;
+  animation: scan 2s ease-in-out infinite;
+}
+
+.scan-square {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #111827;
+  border-radius: 4px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  animation: scan 2s ease-in-out infinite reverse;
+}
+
+.progress-bar {
+  width: 80%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #60a5fa;
+  width: 60%;
+  border-radius: 2px;
+  animation: progress 3s ease-in-out infinite;
+}
+
+.phone-text {
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.phone-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.brightness-icon,
+.menu-icon {
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+}
+
+.menu-icon {
+  width: 12px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+/* Success Bubble */
+.success-bubble {
+  position: absolute;
+  left: 30%;
+  top: 20%;
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+  z-index: 4;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Security Lock */
+.security-lock {
+  position: absolute;
+  right: 20%;
+  top: 40%;
+  color: white;
+  z-index: 4;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Clouds */
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50px;
+  opacity: 0.8;
+  animation: float 4s ease-in-out infinite;
+}
+
+.cloud-1 {
+  width: 60px;
+  height: 20px;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.cloud-2 {
+  width: 40px;
+  height: 15px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.cloud-3 {
+  width: 50px;
+  height: 18px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 2s;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scan {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  50% { width: 60%; }
+  100% { width: 60%; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modern-login-container {
+    flex-direction: column;
+  }
+  
+  .login-right-section {
+    display: none;
+  }
+  
+  .login-left-section {
+    padding: 20px;
+  }
+  
+  .welcome-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form-container {
+    max-width: 100%;
+  }
+  
+  .welcome-title {
+    font-size: 20px;
+  }
+  
+  .welcome-subtitle {
+    font-size: 14px;
+  }
+}
