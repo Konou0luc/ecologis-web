@@ -37,7 +37,7 @@ const ContactForm: React.FC = () => {
 
     if (!formData.phone.trim()) {
       newErrors.phone = 'Le téléphone est requis';
-    } else if (!/^[\+]?[0-9\s\-\(\)]{8,}$/.test(formData.phone)) {
+    } else if (!/^[+]?[0-9\s\-()]{8,}$/.test(formData.phone)) {
       newErrors.phone = 'Format de téléphone invalide';
     }
 
