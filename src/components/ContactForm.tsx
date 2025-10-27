@@ -144,14 +144,6 @@ const ContactForm: React.FC = () => {
     <div className="contact-form-container">
       {/* Contact Information */}
       <div className="contact-info">
-        <h2>
-          Contactez-nous
-        </h2>
-        <p>
-          Notre équipe est là pour vous accompagner dans votre transition énergétique. 
-          N'hésitez pas à nous contacter pour toute question.
-        </p>
-
         <div className="contact-methods">
           {contactInfo.map((info, index) => (
             <div key={index} className="contact-method">

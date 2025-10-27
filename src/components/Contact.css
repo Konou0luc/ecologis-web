@@ -297,6 +297,33 @@
   
   .contact-header {
     margin-bottom: 60px;
+    text-align: left !important;
+  }
+  
+  .contact-title {
+    text-align: left !important;
+  }
+  
+  .contact-description {
+    text-align: left !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header {
+    text-align: left !important;
+  }
+  
+  .contact-title {
+    text-align: left !important;
+    font-size: clamp(24px, 6vw, 32px) !important;
+  }
+  
+  .contact-description {
+    text-align: left !important;
+    margin: 0 !important;
+    font-size: clamp(14px, 4vw, 18px) !important;
   }
 }
 

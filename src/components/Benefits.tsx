@@ -73,21 +73,22 @@ const Benefits: React.FC = () => {
     <section id="benefits" className="benefits-section">
       <div className="container-custom">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '80px', padding: '0 20px' }}>
           <h2 style={{ 
-            fontSize: '36px', 
+            fontSize: 'clamp(28px, 5vw, 42px)', 
             fontWeight: 'bold', 
             color: 'var(--color-text-primary)', 
-            marginBottom: '16px',
-            margin: 0
+            marginBottom: '24px',
+            margin: '0 0 24px 0',
+            lineHeight: '1.2'
           }}>
             L'avantage concurrentiel
             <span style={{ display: 'block', color: '#FFA800' }}>que vous cherchiez</span>
           </h2>
           <p style={{ 
-            fontSize: '20px', 
+            fontSize: 'clamp(16px, 2.5vw, 20px)', 
             color: 'var(--color-text-secondary)', 
-            maxWidth: '768px', 
+            maxWidth: '700px', 
             margin: '0 auto',
             lineHeight: '1.6'
           }}>
@@ -98,25 +99,41 @@ const Benefits: React.FC = () => {
         {/* Stats Grid */}
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', 
-          gap: 'clamp(16px, 3vw, 32px)', 
-          marginBottom: 'clamp(32px, 5vw, 64px)' 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', 
+          gap: 'clamp(20px, 4vw, 40px)', 
+          marginBottom: 'clamp(40px, 6vw, 80px)',
+          padding: '0 20px'
         }} className="benefits-stats">
           {benefits.map((benefit, index) => (
             <div
               key={index}
               style={{ 
-                textAlign: 'center',
-                transition: 'transform 0.3s ease',
-                cursor: 'pointer'
+                textAlign: 'left',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                padding: '24px',
+                background: 'var(--color-card-bg)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '16px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-start'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+              }}
             >
               <div style={{ 
                 width: '64px', 
                 height: '64px', 
-                margin: '0 auto 16px', 
+                margin: '0 0 16px 0', 
                 borderRadius: '50%', 
                 backgroundColor: benefit.bgColor,
                 display: 'flex',

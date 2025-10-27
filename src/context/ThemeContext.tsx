@@ -11,14 +11,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Récupérer le thème sauvegardé ou utiliser la préférence système
+    // Récupérer le thème sauvegardé ou utiliser le thème clair par défaut
     const savedTheme = localStorage.getItem('ecologis-theme') as Theme;
     if (savedTheme) return savedTheme;
     
-    // Vérifier la préférence système
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
+    // Par défaut, utiliser le thème clair
     return 'light';
   });
 

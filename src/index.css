@@ -10,7 +10,7 @@
   --color-success: #4CAF50;
   --color-info: #2196F3;
   
-  /* Thème clair */
+  /* Thème clair par défaut */
   --color-bg: #FFFFFF;
   --color-bg-secondary: #F5F5F5;
   --color-bg-tertiary: #FFF8E1;
@@ -23,6 +23,27 @@
   
   /* Gradient */
   --gradient-hero: linear-gradient(135deg, #FFF8E1 0%, #FFF3C4 100%);
+  
+  /* Couleurs d'état */
+  --color-error: #ef4444;
+  --color-error-hover: #dc2626;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+}
+
+/* Force le thème clair par défaut */
+html:not([data-theme]),
+html[data-theme='light'] {
+  --color-bg: #FFFFFF;
+  --color-bg-secondary: #F5F5F5;
+  --color-bg-tertiary: #FFF8E1;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
+  --color-border: #e5e7eb;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-card-bg: #FFFFFF;
 }
 
 [data-theme='dark'] {
@@ -59,6 +80,94 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Force le thème clair par défaut sur le body */
+html:not([data-theme]) body,
+html[data-theme='light'] body {
+  background-color: #FFFFFF;
+  color: #111827;
+}
+
+/* Amélioration du bouton de fermeture du modal en mode clair */
+[data-theme='light'] .modal-close-btn,
+html:not([data-theme]) .modal-close-btn {
+  background-color: #ef4444 !important;
+  color: white !important;
+  border: 2px solid #dc2626 !important;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3) !important;
+}
+
+[data-theme='light'] .modal-close-btn:hover,
+html:not([data-theme]) .modal-close-btn:hover {
+  background-color: #dc2626 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(220, 38, 38, 0.4) !important;
+}
+
+/* Amélioration générale des boutons de fermeture */
+.modal-close-btn {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Force l'alignement à gauche pour les cartes de contact sur tous les écrans */
+.contact-method {
+  text-align: left !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.contact-method-content {
+  text-align: left !important;
+  margin-top: 16px !important;
+}
+
+.contact-method-content h3,
+.contact-method-content p {
+  text-align: left !important;
+}
+
+/* Force l'alignement à gauche pour la section contact */
+.contact-info {
+  text-align: left !important;
+}
+
+.contact-info h2,
+.contact-info p {
+  text-align: left !important;
+}
+
+.contact-form {
+  text-align: left !important;
+}
+
+.contact-form h2,
+.contact-form p {
+  text-align: left !important;
+}
+
+/* Force l'alignement à gauche pour la section "Découvrez la puissance de l'innovation" */
+.benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] {
+  text-align: left !important;
+}
+
+.benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] h3,
+.benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] p {
+  text-align: left !important;
+}
+
+.benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] > div {
+  text-align: left !important;
+}
+
+.benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] > div > div {
+  text-align: left !important;
 }
 
 /* Animations */
@@ -188,7 +297,13 @@ header.scrolled {
 /* Benefits Section */
 .benefits-section {
   background-color: var(--color-bg);
-  padding: 64px 16px;
+  padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 40px);
+  position: relative;
+}
+
+/* Dark theme for Benefits Section */
+[data-theme='dark'] .benefits-section {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
 }
 
 /* Correction spécifique pour la section CTA des Features */
@@ -542,6 +657,99 @@ a:focus {
   .hero-section {
     padding: 32px 16px !important;
   }
+  
+  /* Aligner les cartes de fonctionnalités à gauche sur petit mobile */
+  .features-grid {
+    text-align: left !important;
+  }
+  
+  .features-grid > div {
+    text-align: left !important;
+  }
+  
+  .features-grid h3 {
+    text-align: left !important;
+    font-size: 16px !important;
+  }
+  
+  .features-grid p {
+    text-align: left !important;
+    font-size: 14px !important;
+  }
+  
+  /* Aligner les cartes de la section Benefits à gauche sur petit mobile */
+  .benefits-features {
+    text-align: left !important;
+  }
+  
+  .benefits-features > div {
+    text-align: left !important;
+  }
+  
+  .benefits-features h3 {
+    text-align: left !important;
+    font-size: 16px !important;
+  }
+  
+  .benefits-features p {
+    text-align: left !important;
+    font-size: 14px !important;
+  }
+  
+  .benefits-stats {
+    text-align: left !important;
+  }
+  
+  .benefits-stats > div {
+    text-align: left !important;
+  }
+  
+  /* Aligner la section "Découvrez la puissance de l'innovation" à gauche sur petit mobile */
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] {
+    text-align: left !important;
+  }
+  
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] h3,
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] p {
+    text-align: left !important;
+  }
+  
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] > div {
+    text-align: left !important;
+  }
+  
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] > div > div {
+    text-align: left !important;
+  }
+  
+  /* Aligner les cartes de contact à gauche sur petit mobile */
+  .contact-method {
+    text-align: left !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .contact-method-icon {
+    align-self: flex-start !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .contact-method-content {
+    margin-top: 0 !important;
+  }
+  
+  .contact-method-content h3,
+  .contact-method-content p {
+    text-align: left !important;
+  }
+  
+  .contact-method-content {
+    text-align: left !important;
+  }
+  
+  .contact-method-content * {
+    text-align: left !important;
+  }
 }
 
 /* Medium devices optimization */
@@ -661,6 +869,18 @@ a:focus {
 [data-theme='dark'] .pricing-section > div > div > div {
   background-color: #1a1a1a !important;
   border-color: #333333 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark mode - Enhanced card styling for benefits */
+[data-theme='dark'] .benefits-section .benefits-stats > div {
+  background: #1a1a1a !important;
+  border: 1px solid #333333 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme='dark'] .benefits-section .benefits-stats > div:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Dark mode - Ensure all text in pricing and benefits sections is visible */
@@ -696,7 +916,9 @@ a:focus {
 /* Dark mode - All divs with white background should be dark */
 [data-theme='dark'] div[style*="backgroundColor: 'white'"],
 [data-theme='dark'] div[style*="background-color: white"],
-[data-theme='dark'] div[style*="backgroundColor: '#fff'"],
+[data-theme='dark'] div[style*="backgroundColor: '#fff'"] {
+  background-color: #1a1a1a !important;
+}
 
 /* ========================================
    RESPONSIVE DESIGN - ALL SCREENS
@@ -755,18 +977,18 @@ a:focus {
   }
   
   .hero-title {
-    font-size: clamp(24px, 6vw, 40px) !important;
-    text-align: center !important;
+    font-size: clamp(36px, 8vw, 48px) !important;
+    text-align: left !important;
   }
   
   .hero-description {
-    font-size: clamp(14px, 3vw, 18px) !important;
-    text-align: center !important;
+    font-size: clamp(16px, 4vw, 20px) !important;
+    text-align: left !important;
   }
   
   .hero-cta {
     flex-direction: column !important;
-    align-items: center !important;
+    align-items: flex-start !important;
     gap: 12px !important;
   }
   
@@ -775,6 +997,78 @@ a:focus {
     max-width: 300px !important;
     padding: 14px 24px !important;
     font-size: 15px !important;
+  }
+  
+  /* Aligner les cartes de fonctionnalités à gauche sur mobile */
+  .features-grid {
+    text-align: left !important;
+  }
+  
+  .features-grid > div {
+    text-align: left !important;
+  }
+  
+  .features-grid > div > div {
+    justify-content: flex-start !important;
+  }
+  
+  .features-grid h3 {
+    text-align: left !important;
+  }
+  
+  .features-grid p {
+    text-align: left !important;
+  }
+  
+  /* Aligner les cartes de la section Benefits à gauche sur mobile */
+  .benefits-features {
+    text-align: left !important;
+  }
+  
+  .benefits-features > div {
+    text-align: left !important;
+  }
+  
+  .benefits-features > div > div {
+    justify-content: flex-start !important;
+  }
+  
+  .benefits-features h3 {
+    text-align: left !important;
+  }
+  
+  .benefits-features p {
+    text-align: left !important;
+  }
+  
+  .benefits-stats {
+    text-align: left !important;
+  }
+  
+  .benefits-stats > div {
+    text-align: left !important;
+  }
+  
+  .benefits-stats > div > div {
+    margin: 0 0 16px 0 !important;
+  }
+  
+  /* Aligner la section "Découvrez la puissance de l'innovation" à gauche sur mobile */
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] {
+    text-align: left !important;
+  }
+  
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] h3,
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] p {
+    text-align: left !important;
+  }
+  
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] > div {
+    text-align: left !important;
+  }
+  
+  .benefits-section > div > div[style*="backgroundColor: 'var(--color-card-bg)'"] > div > div {
+    text-align: left !important;
   }
   
   div[style*="display: grid"][style*="gridTemplateColumns: 'repeat(3, 1fr)'"] {
@@ -945,24 +1239,40 @@ a:focus {
   .contact-method {
     padding: 16px !important;
     flex-direction: column !important;
-    text-align: center !important;
+    text-align: left !important;
     gap: 12px !important;
+    align-items: flex-start !important;
   }
   
   .contact-method-icon {
     width: 40px !important;
     height: 40px !important;
-    align-self: center !important;
+    align-self: flex-start !important;
+    margin-bottom: 8px !important;
   }
   
   .contact-method-content h3,
   .contact-method-content p {
-    text-align: center !important;
+    text-align: left !important;
+  }
+  
+  .contact-method-content {
+    text-align: left !important;
+  }
+  
+  .contact-method-content * {
+    text-align: left !important;
   }
   
   .contact-info h2,
   .contact-form h2 {
     font-size: 24px !important;
+    text-align: left !important;
+  }
+  
+  .contact-info p,
+  .contact-form p {
+    text-align: left !important;
   }
 }
 
@@ -1075,7 +1385,8 @@ a:focus {
   }
   
   .hero-title {
-    font-size: 24px !important;
+    font-size: clamp(32px, 9vw, 40px) !important;
+    text-align: left !important;
   }
   
   .pricing-title {
