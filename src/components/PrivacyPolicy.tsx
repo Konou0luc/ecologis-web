@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Menu, X, ChevronRight, Lock, Eye, Database, UserCheck, AlertTriangle, Globe, Clock, Users, Mail, Phone, MapPin, ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Shield, Lock, Eye, Database, UserCheck, AlertTriangle, Globe, Clock, Users, Mail, Phone, MapPin } from 'lucide-react';
 
 const PrivacyPolicy: React.FC = () => {
   const [activeSection, setActiveSection] = useState('introduction');
-  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 1024);
-  const navigate = useNavigate();
 
   const sections = [
     { id: 'introduction', title: 'Introduction', icon: Shield },
@@ -43,55 +40,16 @@ const PrivacyPolicy: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle window resize
-  useEffect(() => {
-    const handleResize = () => {
-      setSidebarOpen(window.innerWidth > 1024);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setSidebarOpen(false);
   };
 
   return (
     <div className="privacy-policy">
-      {/* Custom Header */}
-      <header className="privacy-custom-header">
-        <div className="header-container">
-          <div className="header-left">
-            <button 
-              className="back-button"
-              onClick={() => navigate('/')}
-            >
-              <ArrowLeft size={20} />
-              <span>Retour</span>
-            </button>
-            <div className="logo">
-              <div className="logo-icon">⚡</div>
-              <span>Ecologis</span>
-            </div>
-          </div>
-          <div className="header-right">
-            <button 
-              className="mobile-menu-btn"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <Menu size={20} />
-              <span>Menu</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
       {/* Page Header */}
       <div className="privacy-header">
         <div className="header-content">
@@ -107,22 +65,10 @@ const PrivacyPolicy: React.FC = () => {
 
       {/* Main Content */}
       <div className="privacy-container">
-        {/* Sidebar Overlay */}
-        <div 
-          className={`sidebar-overlay ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(false)}
-        />
-
-        {/* Sidebar Navigation */}
-        <aside className={`privacy-sidebar ${sidebarOpen ? 'open' : ''}`}>
+        {/* Sidebar Navigation - Desktop Only */}
+        <aside className="privacy-sidebar">
           <div className="sidebar-header">
             <h3>Navigation</h3>
-            <button 
-              className="sidebar-close"
-              onClick={() => setSidebarOpen(false)}
-            >
-              <X size={20} />
-            </button>
           </div>
           <nav className="sidebar-nav">
             {sections.map((section) => {

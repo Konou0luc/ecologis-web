@@ -39,6 +39,7 @@ function App() {
             {/* Routes pour les pages légales */}
             <Route path="/privacy-policy" element={
               <>
+                <Header />
                 <main>
                   <PrivacyPolicy />
                 </main>
