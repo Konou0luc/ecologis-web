@@ -24,10 +24,10 @@ const Footer: React.FC = () => {
       { name: 'Presse', href: '#' }
     ],
     legal: [
-      { name: 'Confidentialité', href: '#' },
-      { name: 'Conditions', href: '#' },
-      { name: 'CGU', href: '#' },
-      { name: 'Cookies', href: '#' }
+      { name: 'Confidentialité', href: '/privacy-policy' },
+      { name: 'Conditions', href: '/terms-of-service' },
+      { name: 'CGU', href: '/terms-of-service' },
+      { name: 'Cookies', href: '/privacy-policy' }
     ]
   };
 
@@ -76,11 +76,11 @@ const Footer: React.FC = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <Phone size={20} color="#FFA800" />
-                  <span style={{ color: '#d1d5db', textAlign: 'left' }}>(+228) 98 75 45 25</span>
+                  <span style={{ color: '#d1d5db', textAlign: 'left' }}>+228 97240460</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <Mail size={20} color="#FFA800" />
-                  <span style={{ color: '#d1d5db', textAlign: 'left' }}>contact@ecologis.tg</span>
+                  <span style={{ color: '#d1d5db', textAlign: 'left' }}>konouluc0@gmail.com</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <MapPin size={20} color="#FFA800" />

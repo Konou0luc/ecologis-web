@@ -9,6 +9,9 @@ import Contact from './components/Contact';
 import MobileApp from './components/MobileApp';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
+import LegalInfo from './components/LegalInfo';
 import AdminApp from './admin/AdminApp';
 import Login from './admin/pages/Login';
 import { AuthProvider } from './admin/context/AuthContext';
@@ -31,6 +34,37 @@ function App() {
               <AuthProvider>
                 <Login />
               </AuthProvider>
+            } />
+            
+            {/* Routes pour les pages légales */}
+            <Route path="/privacy-policy" element={
+              <>
+                <main>
+                  <PrivacyPolicy />
+                </main>
+                <Footer />
+                <ThemeToggle />
+              </>
+            } />
+            <Route path="/terms-of-service" element={
+              <>
+                <Header />
+                <main>
+                  <TermsOfService />
+                </main>
+                <Footer />
+                <ThemeToggle />
+              </>
+            } />
+            <Route path="/legal-info" element={
+              <>
+                <Header />
+                <main>
+                  <LegalInfo />
+                </main>
+                <Footer />
+                <ThemeToggle />
+              </>
             } />
             
             {/* Routes pour le site principal */}

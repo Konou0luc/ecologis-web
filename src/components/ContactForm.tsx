@@ -103,13 +103,13 @@ const ContactForm: React.FC = () => {
     {
       icon: Phone,
       title: 'Téléphone',
-      content: '(+228) 98 75 45 25',
+      content: '+228 97240460',
       description: 'Lun-Ven 8h-18h'
     },
     {
       icon: Mail,
       title: 'Email',
-      content: 'contact@ecologis.tg',
+      content: 'konouluc0@gmail.com',
       description: 'Réponse sous 24h'
     },
     {
