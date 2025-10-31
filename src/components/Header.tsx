@@ -24,10 +24,8 @@ const Header: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 0' }}>
           {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ backgroundColor: '#FFA800', padding: '8px', borderRadius: '8px' }}>
-              <Zap size={24} color="white" />
-            </div>
-            <span style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--color-text-primary)' }}>Ecologis</span>
+            <img src="/logo.png" alt="Ecopower" style={{ height: '40px', width: 'auto' }} />
+            <span style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--color-text-primary)' }}>Ecopower</span>
           </div>
 
           {/* Desktop Navigation */}

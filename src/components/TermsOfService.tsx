@@ -22,7 +22,7 @@ const TermsOfService: React.FC = () => {
         <div className="terms-section">
           <h2>1. Acceptation des Conditions</h2>
           <p>
-            En utilisant l'application Ecologis, vous acceptez d'être lié par ces conditions d'utilisation. 
+            En utilisant l'application Ecopower, vous acceptez d'être lié par ces conditions d'utilisation. 
             Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre service.
           </p>
         </div>
@@ -31,7 +31,7 @@ const TermsOfService: React.FC = () => {
         <div className="terms-section">
           <h2>2. Description du Service</h2>
           <p>
-            Ecologis est une plateforme de gestion de consommation électrique qui permet aux propriétaires 
+            Ecopower est une plateforme de gestion de consommation électrique qui permet aux propriétaires 
             et gestionnaires de biens immobiliers de :
           </p>
           <ul>
@@ -80,7 +80,7 @@ const TermsOfService: React.FC = () => {
         {/* User Obligations */}
         <div className="terms-section">
           <h2>5. Obligations de l'Utilisateur</h2>
-          <p>En utilisant Ecologis, vous vous engagez à :</p>
+          <p>En utilisant Ecopower, vous vous engagez à :</p>
           <ul>
             <li>Fournir des informations exactes et à jour</li>
             <li>Respecter toutes les lois applicables</li>
@@ -94,7 +94,7 @@ const TermsOfService: React.FC = () => {
         {/* Prohibited Uses */}
         <div className="terms-section">
           <h2>6. Utilisations Interdites</h2>
-          <p>Il est interdit d'utiliser Ecologis pour :</p>
+          <p>Il est interdit d'utiliser Ecopower pour :</p>
           <ul>
             <li>Des activités illégales ou non autorisées</li>
             <li>Transmettre des virus ou codes malveillants</li>
@@ -109,7 +109,7 @@ const TermsOfService: React.FC = () => {
         <div className="terms-section">
           <h2>7. Propriété Intellectuelle</h2>
           <p>
-            Ecologis et son contenu sont protégés par les lois sur la propriété intellectuelle. 
+            Ecopower et son contenu sont protégés par les lois sur la propriété intellectuelle. 
             Vous ne pouvez pas copier, modifier, distribuer ou créer des œuvres dérivées sans 
             notre autorisation écrite.
           </p>
@@ -141,7 +141,7 @@ const TermsOfService: React.FC = () => {
         <div className="terms-section">
           <h2>10. Limitation de Responsabilité</h2>
           <p>
-            Dans la mesure permise par la loi, Ecologis ne sera pas responsable des dommages 
+            Dans la mesure permise par la loi, Ecopower ne sera pas responsable des dommages 
             indirects, consécutifs, spéciaux ou punitifs résultant de l'utilisation de notre service.
           </p>
         </div>
@@ -150,7 +150,7 @@ const TermsOfService: React.FC = () => {
         <div className="terms-section">
           <h2>11. Indemnisation</h2>
           <p>
-            Vous acceptez d'indemniser et de dégager Ecologis de toute responsabilité concernant 
+            Vous acceptez d'indemniser et de dégager Ecopower de toute responsabilité concernant 
             les réclamations résultant de votre utilisation du service ou de votre violation de 
             ces conditions.
           </p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -57,10 +57,8 @@ const Footer: React.FC = () => {
                 marginBottom: '24px',
                 justifyContent: 'flex-start'
               }}>
-                <div style={{ backgroundColor: '#FFA800', padding: '8px', borderRadius: '8px' }}>
-                  <Zap size={24} color="white" />
-                </div>
-                <span style={{ fontSize: '24px', fontWeight: 'bold', textAlign: 'left' }}>Ecologis</span>
+                <img src="/logo.png" alt="Ecopower" style={{ height: '40px', width: 'auto' }} />
+                <span style={{ fontSize: '24px', fontWeight: 'bold', textAlign: 'left' }}>Ecopower</span>
               </div>
               <p style={{ 
                 color: '#d1d5db', 
@@ -251,7 +249,7 @@ const Footer: React.FC = () => {
           }}>
             {/* Copyright */}
             <div style={{ color: '#9ca3af', fontSize: '14px', textAlign: 'left' }}>
-              © {currentYear} Ecologis. Tous droits réservés.
+              © {currentYear} Ecopower. Tous droits réservés.
             </div>
 
             {/* Legal Links */}

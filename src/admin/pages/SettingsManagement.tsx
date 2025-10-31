@@ -111,7 +111,7 @@ const SettingsManagement: React.FC = () => {
       }
     },
     general: {
-      appName: 'Ecologis',
+      appName: 'Ecopower',
       baseUrl: 'https://ecologis-api.vercel.app',
       maintenanceMode: false,
       defaultLanguage: 'fr',

@@ -113,7 +113,7 @@ const MobileApp: React.FC = () => {
           </div>
           <h2 className="mobile-app-title">Application Mobile</h2>
           <p className="mobile-app-description">
-            Découvrez l'expérience Ecologis sur mobile avec une interface intuitive et des fonctionnalités complètes
+            Découvrez l'expérience Ecopower sur mobile avec une interface intuitive et des fonctionnalités complètes
           </p>
         </div>
 
@@ -207,7 +207,7 @@ const MobileApp: React.FC = () => {
         </div>
 
         <div className="mobile-app-cta">
-          <h3>Téléchargez l'application Ecologis</h3>
+          <h3>Téléchargez l'application Ecopower</h3>
           <p>Disponible sur iOS et Android</p>
           <div className="download-buttons">
             <button className="download-btn ios">

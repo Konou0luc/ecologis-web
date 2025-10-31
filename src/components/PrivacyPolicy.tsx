@@ -94,12 +94,12 @@ const PrivacyPolicy: React.FC = () => {
           <div id="introduction" className="privacy-section">
             <h2>1. Introduction</h2>
             <p>
-              Chez Ecologis, nous nous engageons à protéger votre vie privée et vos données personnelles. 
+              Chez Ecopower, nous nous engageons à protéger votre vie privée et vos données personnelles. 
               Cette politique de confidentialité explique comment nous collectons, utilisons, stockons 
               et protégeons vos informations lorsque vous utilisez notre application mobile et nos services.
             </p>
             <p>
-              En utilisant Ecologis, vous acceptez les pratiques décrites dans cette politique de confidentialité.
+              En utilisant Ecopower, vous acceptez les pratiques décrites dans cette politique de confidentialité.
             </p>
           </div>
 

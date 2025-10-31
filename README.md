@@ -1,6 +1,6 @@
-# 🌐 Site Web Ecologis
+# 🌐 Site Web Ecopower
 
-Site de présentation officiel de l'application Ecologis - Solution de gestion de consommation électrique.
+Site de présentation officiel de l'application Ecopower - Solution de gestion de consommation électrique.
 
 ## 🎨 Design
 
@@ -64,7 +64,7 @@ Les fichiers optimisés seront dans le dossier `build/`
 ## 📦 Structure
 
 ```
-ecologis-website/
+ecopower-website/
 ├── public/
 ├── src/
 │   ├── components/
@@ -169,14 +169,14 @@ Tous les éléments respectent les normes WCAG 2.1 :
 
 ## 📝 Licence
 
-© 2025 Ecologis. Tous droits réservés.
+© 2025 Ecopower. Tous droits réservés.
 
 ## 📞 Contact
 
-- **Email**: contact@ecologis.tg
+- **Email**: contact@ecopower.tg
 - **Téléphone**: (+228) 98 75 45 25 / 96 18 59 19
 - **Adresse**: Lomé, Togo
 
 ---
 
-Développé avec ❤️ pour Ecologis
+Développé avec ❤️ pour Ecopower

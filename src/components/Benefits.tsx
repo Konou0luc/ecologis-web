@@ -92,7 +92,7 @@ const Benefits: React.FC = () => {
             margin: '0 auto',
             lineHeight: '1.6'
           }}>
-            Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecologis
+            Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecopower
           </p>
         </div>
 
@@ -253,7 +253,7 @@ const Benefits: React.FC = () => {
                 margin: '0 0 24px 0',
                 lineHeight: '1.6'
               }}>
-                Ecologis révolutionne votre gestion de consommation électrique. 
+                Ecopower révolutionne votre gestion de consommation électrique. 
                 La plateforme suit vos tendances, anticipe vos besoins et vous aide 
                 à prendre les bonnes décisions au bon moment.
               </p>
@@ -348,7 +348,7 @@ const Benefits: React.FC = () => {
                 <div className="team-image-container">
                   <img 
                     src="/assets/screens/people-office-work-day.jpg" 
-                    alt="Équipe Ecologis - Experts en gestion d'énergie"
+                    alt="Équipe Ecopower - Experts en gestion d'énergie"
                     className="team-image"
                     loading="lazy"
                     onError={(e) => {
@@ -362,7 +362,7 @@ const Benefits: React.FC = () => {
                   />
                   <div className="team-image-placeholder" style={{ display: 'none' }}>
                     <div className="team-icon">👥</div>
-                    <div className="team-title">Équipe Ecologis</div>
+                    <div className="team-title">Équipe Ecopower</div>
                     <div className="team-subtitle">Experts en gestion d'énergie</div>
                   </div>
                 </div>
@@ -376,7 +376,7 @@ const Benefits: React.FC = () => {
                 </h3>
                 
                 <p className="team-description">
-                  Derrière Ecologis se trouve une équipe d'experts passionnés par l'innovation 
+                  Derrière Ecopower se trouve une équipe d'experts passionnés par l'innovation 
                   et dédiés à votre succès. Nos développeurs, analystes et consultants travaillent 
                   sans relâche pour vous offrir la meilleure expérience possible et un support exceptionnel.
                 </p>

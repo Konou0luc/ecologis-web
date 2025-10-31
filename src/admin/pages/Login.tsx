@@ -17,7 +17,7 @@ const Login: React.FC = () => {
   // Notification de bienvenue au chargement de la page
   useEffect(() => {
     const timer = setTimeout(() => {
-      showInfo('Bienvenue', 'Connectez-vous à votre espace administrateur Ecologis.');
+      showInfo('Bienvenue', 'Connectez-vous à votre espace administrateur Ecopower.');
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -124,7 +124,7 @@ const Login: React.FC = () => {
             <div className="brand-icon">
               <Zap size={24} />
             </div>
-            <span className="brand-text">Ecologis</span>
+            <span className="brand-text">Ecopower</span>
           </div>
 
           {/* Welcome Message */}

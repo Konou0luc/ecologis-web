@@ -1,9 +1,9 @@
-# Informations Google Play Store - Ecologis
+# Informations Google Play Store - Ecopower
 
 ## 📱 Informations de l'Application
 
 ### Nom de l'App
-- **Nom court** : Ecologis
+- **Nom court** : Ecopower
 - **Caractères** : 8/30 ✅
 
 ### Descriptions
@@ -15,9 +15,9 @@
 
 - **Description longue (4000 caractères max)** :
   ```
-  Ecologis - Révolutionnez votre gestion d'énergie
+  Ecopower - Révolutionnez votre gestion d'énergie
 
-  Ecologis est la solution complète qui transforme votre gestion de consommation électrique en avantage concurrentiel. Conçue spécialement pour les propriétaires et gestionnaires de biens immobiliers au Togo, notre application mobile vous offre un contrôle total sur votre consommation énergétique.
+  Ecopower est la solution complète qui transforme votre gestion de consommation électrique en avantage concurrentiel. Conçue spécialement pour les propriétaires et gestionnaires de biens immobiliers au Togo, notre application mobile vous offre un contrôle total sur votre consommation énergétique.
 
   Fonctionnalités principales :
   📊 Suivi en temps réel de la consommation électrique
@@ -39,14 +39,14 @@
   • Premium : 650 FCFA/mois - Parfait pour propriétés moyennes
   • Enterprise : 800 FCFA/mois - Pour grandes propriétés
 
-  Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecologis. Téléchargez maintenant et transformez votre gestion énergétique !
+  Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecopower. Téléchargez maintenant et transformez votre gestion énergétique !
   ```
   - **Caractères** : 1,247/4,000 ✅
 
 ## 🏢 Informations de l'Entreprise
 
 ### Développeur
-- **Nom** : Ecologis Technologies
+- **Nom** : Ecopower Technologies
 - **Pays** : Togo
 - **Région** : Afrique de l'Ouest
 

@@ -72,7 +72,7 @@ const Sidebar: React.FC = () => {
           </div>
           {!collapsed && (
             <div className="logo-text">
-              <span className="logo-title">Ecologis</span>
+              <span className="logo-title">Ecopower</span>
               <span className="logo-subtitle">Admin</span>
             </div>
           )}

@@ -211,7 +211,7 @@ const Features: React.FC = () => {
                 fontSize: 'clamp(16px, 2.5vw, 18px)',
                 margin: '0 0 32px 0'
               }}>
-                Rejoignez les propriétaires qui ont déjà fait le choix de l'excellence avec Ecologis.
+                Rejoignez les propriétaires qui ont déjà fait le choix de l'excellence avec Ecopower.
               </p>
               <div className="features-cta-buttons">
                 <button className="btn-primary" style={{

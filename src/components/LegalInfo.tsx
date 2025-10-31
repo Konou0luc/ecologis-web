@@ -25,12 +25,12 @@ const LegalInfo: React.FC = () => {
             <div className="info-card">
               <Globe className="icon" />
               <h3>Nom de l'Application</h3>
-              <p>Ecologis</p>
+              <p>Ecopower</p>
             </div>
             <div className="info-card">
               <Users className="icon" />
               <h3>Développeur</h3>
-              <p>Ecologis Technologies</p>
+              <p>Ecopower Technologies</p>
             </div>
             <div className="info-card">
               <MapPin className="icon" />
@@ -73,7 +73,7 @@ const LegalInfo: React.FC = () => {
           <div className="app-info">
             <div className="app-details">
               <h3>Nom de l'App (30 caractères max)</h3>
-              <p className="app-name">Ecologis</p>
+              <p className="app-name">Ecopower</p>
             </div>
             <div className="app-details">
               <h3>Courte Description (80 caractères max)</h3>
@@ -83,10 +83,10 @@ const LegalInfo: React.FC = () => {
               <h3>Description Longue (4000 caractères max)</h3>
               <div className="app-long-desc">
                 <p>
-                  <strong>Ecologis - Révolutionnez votre gestion d'énergie</strong>
+                  <strong>Ecopower - Révolutionnez votre gestion d'énergie</strong>
                 </p>
                 <p>
-                  Ecologis est la solution complète qui transforme votre gestion de consommation électrique 
+                  Ecopower est la solution complète qui transforme votre gestion de consommation électrique 
                   en avantage concurrentiel. Conçue spécialement pour les propriétaires et gestionnaires 
                   de biens immobiliers au Togo, notre application mobile vous offre un contrôle total sur 
                   votre consommation énergétique.
@@ -121,7 +121,7 @@ const LegalInfo: React.FC = () => {
                   <li>Enterprise : 800 FCFA/mois - Pour grandes propriétés</li>
                 </ul>
                 <p>
-                  Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecologis. 
+                  Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecopower. 
                   Téléchargez maintenant et transformez votre gestion énergétique !
                 </p>
               </div>
