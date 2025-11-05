@@ -41,10 +41,10 @@ const Hero: React.FC = () => {
 
             {/* Stats */}
             <div style={{ 
-              display: 'grid', 
+              display: 'flex', 
               gridTemplateColumns: 'repeat(3, 1fr)', 
-              gap: '24px', 
-              padding: '24px 0' 
+              gap: '30px', 
+              padding: '24px 0',
             }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>50+</div>
