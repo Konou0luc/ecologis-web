@@ -112,7 +112,7 @@ const SettingsManagement: React.FC = () => {
     },
     general: {
       appName: 'Ecopower',
-      baseUrl: 'https://ecologis-api.vercel.app',
+      baseUrl: 'https://ecopower-api.vercel.app',
       maintenanceMode: false,
       defaultLanguage: 'fr',
       timezone: 'Africa/Lome'

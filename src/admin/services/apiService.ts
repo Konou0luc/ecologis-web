@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://ecologis-api.vercel.app';
+const API_BASE_URL = 'https://ecopower-api.vercel.app';
 
 interface ApiResponse<T> {
   data?: T;
