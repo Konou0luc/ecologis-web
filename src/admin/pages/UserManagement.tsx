@@ -7,10 +7,21 @@ import {
   Eye, 
   Phone,
   Calendar,
-  Shield
+  Shield,
+  ChevronUp,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Filter,
+  X,
+  Mail,
+  User
 } from 'lucide-react';
 import apiService from '../services/apiService';
-import './UserManagement.css';
+import { AdminCard, AdminCardHeader, AdminCardTitle, AdminCardDescription, AdminCardContent } from '../components/ui/AdminCard';
+import { AdminButton } from '../components/ui/AdminButton';
+import { AdminTable, AdminTableHeader, AdminTableRow, AdminTableHead, AdminTableCell, AdminTableBody } from '../components/ui/AdminTable';
+import { AdminModal } from '../components/ui/AdminModal';
 
 interface User {
   _id: string;
@@ -38,10 +49,13 @@ const UserManagement: React.FC = () => {
     pages: 0
   });
   const [error, setError] = useState<string | null>(null);
+  const [sortColumn, setSortColumn] = useState<string | null>(null);
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
 
   useEffect(() => {
     loadUsers();
-  }, [searchQuery, roleFilter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, roleFilter, pagination.page]);
 
   const loadUsers = async () => {
     setLoading(true);
@@ -80,7 +94,6 @@ const UserManagement: React.FC = () => {
       if (response.error) {
         alert('Erreur lors de la suppression: ' + response.error);
       } else {
-        // Recharger la liste des utilisateurs
         loadUsers();
       }
     } catch (err) {
@@ -91,24 +104,41 @@ const UserManagement: React.FC = () => {
 
   const getRoleBadge = (role: string) => {
     const roleConfig = {
-      'super-admin': { label: 'Super Admin', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.1)' },
-      'admin': { label: 'Admin', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.1)' },
-      'proprietaire': { label: 'Propriétaire', color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)' },
-      'resident': { label: 'Résident', color: '#10b981', bg: 'rgba(16, 185, 129, 0.1)' }
+      'super-admin': { label: 'Super Admin', color: 'bg-red-100 text-red-700 border-red-200', icon: Shield },
+      'admin': { label: 'Admin', color: 'bg-amber-100 text-amber-700 border-amber-200', icon: Shield },
+      'proprietaire': { label: 'Propriétaire', color: 'bg-blue-100 text-blue-700 border-blue-200', icon: User },
+      'resident': { label: 'Résident', color: 'bg-green-100 text-green-700 border-green-200', icon: User }
     };
     
     const config = roleConfig[role as keyof typeof roleConfig] || roleConfig.resident;
+    const Icon = config.icon;
     
     return (
       <span 
-        className="role-badge"
-        style={{ color: config.color, backgroundColor: config.bg }}
+        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold border ${config.color}`}
       >
+        <Icon className="w-3 h-3" />
         {config.label}
       </span>
     );
   };
 
+  const getInitials = (prenom: string, nom: string) => {
+    return `${prenom.charAt(0)}${nom.charAt(0)}`.toUpperCase();
+  };
+
+  const getAvatarColor = (prenom: string, nom: string) => {
+    const colors = [
+      'bg-gradient-to-br from-blue-500 to-blue-600',
+      'bg-gradient-to-br from-purple-500 to-purple-600',
+      'bg-gradient-to-br from-pink-500 to-pink-600',
+      'bg-gradient-to-br from-indigo-500 to-indigo-600',
+      'bg-gradient-to-br from-teal-500 to-teal-600',
+      'bg-gradient-to-br from-orange-500 to-orange-600',
+    ];
+    const index = (prenom.charCodeAt(0) + nom.charCodeAt(0)) % colors.length;
+    return colors[index];
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('fr-FR', {
@@ -125,247 +155,419 @@ const UserManagement: React.FC = () => {
     setShowUserModal(true);
   };
 
-  if (loading) {
+  const handleSort = (column: string) => {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortColumn(column);
+      setSortDirection('desc');
+    }
+  };
+
+  const sortedUsers = [...users].sort((a, b) => {
+    if (!sortColumn) return 0;
+    
+    let comparison = 0;
+    switch (sortColumn) {
+      case 'name':
+        comparison = `${a.prenom} ${a.nom}`.localeCompare(`${b.prenom} ${b.nom}`);
+        break;
+      case 'email':
+        comparison = a.email.localeCompare(b.email);
+        break;
+      case 'role':
+        comparison = a.role.localeCompare(b.role);
+        break;
+      case 'createdAt':
+        comparison = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        break;
+      default:
+        return 0;
+    }
+    
+    return sortDirection === 'asc' ? comparison : -comparison;
+  });
+
+  const SortIcon = ({ column }: { column: string }) => {
+    if (sortColumn !== column) {
+      return <ChevronUp className="w-3 h-3 text-gray-400 opacity-50" />;
+    }
+    return sortDirection === 'asc' 
+      ? <ChevronUp className="w-3 h-3 text-gray-600" />
+      : <ChevronDown className="w-3 h-3 text-gray-600" />;
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPagination(prev => ({ ...prev, page: newPage }));
+  };
+
+  if (loading && users.length === 0) {
     return (
-      <div className="user-management-loading">
-        <div className="loading-spinner"></div>
-        <p>Chargement des utilisateurs...</p>
+      <div className="flex flex-col items-center justify-center min-h-[400px]">
+        <div className="w-12 h-12 border-4 border-gray-200 border-t-[#FFA800] rounded-full animate-spin mb-4"></div>
+        <p className="text-gray-600">Chargement des utilisateurs...</p>
       </div>
     );
   }
 
   return (
-    <div className="user-management">
-      <div className="page-header">
-        <div className="header-content">
-          <h1>Gestion des utilisateurs</h1>
-          <p>Gérez tous les utilisateurs de la plateforme</p>
+    <div className="p-6 lg:p-8 bg-gray-50 min-h-screen">
+      {/* Page Header */}
+      <div className="flex items-center justify-between mb-8">
+        <div className="text-left">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2 text-left">Gestion des utilisateurs</h1>
+          <p className="text-sm text-gray-500 text-left">Gérez tous les utilisateurs de la plateforme</p>
         </div>
-        <button 
-          className="add-user-btn"
+        <AdminButton 
           onClick={() => setShowAddModal(true)}
+          className="flex items-center gap-2"
         >
-          <Plus size={20} />
-          <span>Nouvel utilisateur</span>
-        </button>
+          <Plus className="w-4 h-4" />
+          Nouvel utilisateur
+        </AdminButton>
       </div>
 
-      {/* Filters */}
-      <div className="filters-section">
-        <div className="search-container">
-          <Search size={18} className="search-icon" />
-          <input
-            type="text"
-            placeholder="Rechercher un utilisateur..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-        </div>
-        
-        <div className="filters">
-          <select 
-            value={roleFilter} 
-            onChange={(e) => setRoleFilter(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">Tous les rôles</option>
-            <option value="super-admin">Super Admin</option>
-            <option value="admin">Admin</option>
-            <option value="proprietaire">Propriétaire</option>
-            <option value="resident">Résident</option>
-          </select>
-          
-        </div>
-      </div>
+      {/* Filters Section */}
+      <AdminCard className="bg-white border border-gray-200 mb-6">
+        <AdminCardContent className="pt-6">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Search */}
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Rechercher un utilisateur..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFA800] focus:border-transparent text-sm"
+              />
+            </div>
+            
+            {/* Role Filter */}
+            <div className="flex items-center gap-2">
+              <Filter className="w-5 h-5 text-gray-400" />
+              <select 
+                value={roleFilter} 
+                onChange={(e) => setRoleFilter(e.target.value)}
+                className="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFA800] focus:border-transparent text-sm bg-white min-w-[180px]"
+              >
+                <option value="all">Tous les rôles</option>
+                <option value="super-admin">Super Admin</option>
+                <option value="admin">Admin</option>
+                <option value="proprietaire">Propriétaire</option>
+                <option value="resident">Résident</option>
+              </select>
+            </div>
+
+            {/* Clear Filters */}
+            {(searchQuery || roleFilter !== 'all') && (
+              <AdminButton
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setSearchQuery('');
+                  setRoleFilter('all');
+                }}
+                className="flex items-center gap-2"
+              >
+                <X className="w-4 h-4" />
+                Réinitialiser
+              </AdminButton>
+            )}
+          </div>
+        </AdminCardContent>
+      </AdminCard>
 
       {/* Users Table */}
-      <div className="users-table-container">
-        <div className="table-header">
-          <div className="table-info">
-            <span>{pagination.total} utilisateur(s) trouvé(s)</span>
+      <AdminCard className="bg-white border border-gray-200 shadow-lg overflow-hidden">
+        <AdminCardHeader className="bg-gradient-to-r from-gray-50 to-white">
+          <div className="flex items-center justify-between">
+            <div className="text-left">
+              <AdminCardTitle className="text-xl font-bold text-gray-900 text-left">Liste des utilisateurs</AdminCardTitle>
+              <AdminCardDescription className="text-sm text-gray-500 text-left mt-1">
+                {pagination.total} utilisateur{pagination.total > 1 ? 's' : ''} trouvé{pagination.total > 1 ? 's' : ''}
+              </AdminCardDescription>
+            </div>
           </div>
-        </div>
+        </AdminCardHeader>
         
-        <div className="users-table">
-          <div className="table-header-row">
-            <div className="col-user">Utilisateur</div>
-            <div className="col-role">Rôle</div>
-            <div className="col-status">Statut</div>
-            <div className="col-created">Créé le</div>
-            <div className="col-last-login">Dernière connexion</div>
-            <div className="col-actions">Actions</div>
-          </div>
-          
-          {users.map((user) => (
-            <div key={user._id} className="table-row">
-              <div className="col-user">
-                <div className="user-info">
-                  <div className="user-avatar">
-                    {user.prenom.charAt(0)}{user.nom.charAt(0)}
-                  </div>
-                  <div className="user-details">
-                    <div className="user-name">{user.prenom} {user.nom}</div>
-                    <div className="user-email">{user.email}</div>
-                  </div>
-                </div>
+        <AdminCardContent className="p-0">
+          {error && (
+            <div className="mx-6 mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-700">{error}</p>
+              <AdminButton
+                variant="outline"
+                size="sm"
+                onClick={loadUsers}
+                className="mt-2"
+              >
+                Réessayer
+              </AdminButton>
+            </div>
+          )}
+
+          {!loading && sortedUsers.length === 0 && !error && (
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="w-16 h-16 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center mb-4">
+                <User className="w-8 h-8 text-gray-400" />
               </div>
-              
-              <div className="col-role">
-                {getRoleBadge(user.role)}
+              <p className="text-sm font-semibold text-gray-600 mb-1">Aucun utilisateur trouvé</p>
+              <p className="text-xs text-gray-500">Essayez de modifier vos critères de recherche</p>
+            </div>
+          )}
+
+          {sortedUsers.length > 0 && (
+            <div className="overflow-x-auto">
+              <AdminTable>
+                <AdminTableHeader>
+                  <AdminTableRow>
+                    <AdminTableHead>
+                      <button
+                        onClick={() => handleSort('name')}
+                        className="flex items-center gap-2 hover:text-gray-900 transition-colors"
+                      >
+                        Utilisateur
+                        <SortIcon column="name" />
+                      </button>
+                    </AdminTableHead>
+                    <AdminTableHead>
+                      <button
+                        onClick={() => handleSort('email')}
+                        className="flex items-center gap-2 hover:text-gray-900 transition-colors"
+                      >
+                        Email
+                        <SortIcon column="email" />
+                      </button>
+                    </AdminTableHead>
+                    <AdminTableHead>
+                      <button
+                        onClick={() => handleSort('role')}
+                        className="flex items-center gap-2 hover:text-gray-900 transition-colors"
+                      >
+                        Rôle
+                        <SortIcon column="role" />
+                      </button>
+                    </AdminTableHead>
+                    <AdminTableHead>
+                      <span className="flex items-center gap-2">Statut</span>
+                    </AdminTableHead>
+                    <AdminTableHead>
+                      <button
+                        onClick={() => handleSort('createdAt')}
+                        className="flex items-center gap-2 hover:text-gray-900 transition-colors"
+                      >
+                        Créé le
+                        <SortIcon column="createdAt" />
+                      </button>
+                    </AdminTableHead>
+                    <AdminTableHead>
+                      <span className="flex items-center gap-2">Dernière connexion</span>
+                    </AdminTableHead>
+                    <AdminTableHead className="text-right">Actions</AdminTableHead>
+                  </AdminTableRow>
+                </AdminTableHeader>
+                <AdminTableBody>
+                  {sortedUsers.map((user, index) => (
+                    <AdminTableRow 
+                      key={user._id}
+                      className={`hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-transparent transition-all ${
+                        index % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'
+                      }`}
+                    >
+                      <AdminTableCell>
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-full ${getAvatarColor(user.prenom, user.nom)} flex items-center justify-center text-white font-semibold text-sm shadow-sm`}>
+                            {getInitials(user.prenom, user.nom)}
+                          </div>
+                          <div>
+                            <div className="text-sm font-semibold text-gray-900">
+                              {user.prenom} {user.nom}
+                            </div>
+                            <div className="text-xs text-gray-500 flex items-center gap-1">
+                              <Phone className="w-3 h-3" />
+                              {user.telephone}
+                            </div>
+                          </div>
+                        </div>
+                      </AdminTableCell>
+                      <AdminTableCell>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <Mail className="w-4 h-4 text-gray-400" />
+                          {user.email}
+                        </div>
+                      </AdminTableCell>
+                      <AdminTableCell>
+                        {getRoleBadge(user.role)}
+                      </AdminTableCell>
+                      <AdminTableCell>
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 border border-green-200">
+                          Actif
+                        </span>
+                      </AdminTableCell>
+                      <AdminTableCell>
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Calendar className="w-4 h-4 text-gray-400" />
+                          {formatDate(user.createdAt)}
+                        </div>
+                      </AdminTableCell>
+                      <AdminTableCell>
+                        {user.lastLogin ? (
+                          <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <Calendar className="w-4 h-4 text-gray-400" />
+                            {formatDate(user.lastLogin)}
+                          </div>
+                        ) : (
+                          <span className="text-xs text-gray-400 italic">Jamais connecté</span>
+                        )}
+                      </AdminTableCell>
+                      <AdminTableCell>
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => handleViewUser(user)}
+                            className="p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
+                            title="Voir les détails"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button
+                            className="p-2 rounded-lg bg-amber-50 text-amber-600 hover:bg-amber-100 transition-colors"
+                            title="Modifier"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteUser(user._id)}
+                            className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                            title="Supprimer"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </AdminTableCell>
+                    </AdminTableRow>
+                  ))}
+                </AdminTableBody>
+              </AdminTable>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {pagination.pages > 1 && (
+            <div className="px-6 py-4 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
+              <div className="text-sm text-gray-600">
+                Page {pagination.page} sur {pagination.pages}
               </div>
-              
-              <div className="col-status">
-                <span className="status-badge">Actif</span>
-              </div>
-              
-              <div className="col-created">
-                <div className="date-info">
-                  <Calendar size={14} />
-                  <span>{formatDate(user.createdAt)}</span>
-                </div>
-              </div>
-              
-              <div className="col-last-login">
-                {user.lastLogin ? (
-                  <div className="date-info">
-                    <Calendar size={14} />
-                    <span>{formatDate(user.lastLogin)}</span>
-                  </div>
-                ) : (
-                  <span className="no-data">Jamais connecté</span>
-                )}
-              </div>
-              
-              <div className="col-actions">
-                <div className="action-buttons">
-                  <button 
-                    className="action-btn view"
-                    onClick={() => handleViewUser(user)}
-                    title="Voir les détails"
-                  >
-                    <Eye size={16} />
-                  </button>
-                  <button 
-                    className="action-btn edit"
-                    title="Modifier"
-                  >
-                    <Edit size={16} />
-                  </button>
-                  <button 
-                    className="action-btn delete"
-                    onClick={() => handleDeleteUser(user._id)}
-                    title="Supprimer"
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
+              <div className="flex items-center gap-2">
+                <AdminButton
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handlePageChange(pagination.page - 1)}
+                  disabled={pagination.page === 1}
+                  className="flex items-center gap-1"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Précédent
+                </AdminButton>
+                <AdminButton
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handlePageChange(pagination.page + 1)}
+                  disabled={pagination.page === pagination.pages}
+                  className="flex items-center gap-1"
+                >
+                  Suivant
+                  <ChevronRight className="w-4 h-4" />
+                </AdminButton>
               </div>
             </div>
-          ))}
-        </div>
-        
-        {loading && (
-          <div className="loading-overlay">
-            <div className="loading-spinner"></div>
-            <p>Chargement des utilisateurs...</p>
-          </div>
-        )}
-        
-        {error && (
-          <div className="error-message">
-            <p>{error}</p>
-            <button onClick={loadUsers}>Réessayer</button>
-          </div>
-        )}
-        
-        {!loading && users.length === 0 && !error && (
-          <div className="empty-state">
-            <p>Aucun utilisateur trouvé</p>
-          </div>
-        )}
-      </div>
+          )}
+        </AdminCardContent>
+      </AdminCard>
 
       {/* User Details Modal */}
-      {showUserModal && selectedUser && (
-        <div className="modal-overlay" onClick={() => setShowUserModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Détails de l'utilisateur</h2>
-              <button 
-                className="modal-close"
-                onClick={() => setShowUserModal(false)}
-              >
-                ×
-              </button>
-            </div>
-            
-            <div className="modal-body">
-              <div className="user-profile">
-                <div className="profile-avatar">
-                  {selectedUser.prenom.charAt(0)}{selectedUser.nom.charAt(0)}
+      <AdminModal
+        isOpen={showUserModal}
+        onClose={() => setShowUserModal(false)}
+        title="Détails de l'utilisateur"
+        size="md"
+      >
+        {selectedUser && (
+          <div className="space-y-6">
+            {/* Profile Header */}
+            <div className="flex items-center gap-4 pb-6 border-b border-gray-200">
+              <div className={`w-16 h-16 rounded-full ${getAvatarColor(selectedUser.prenom, selectedUser.nom)} flex items-center justify-center text-white font-bold text-lg shadow-md`}>
+                {getInitials(selectedUser.prenom, selectedUser.nom)}
+              </div>
+              <div className="flex-1 text-left">
+                <h3 className="text-lg font-bold text-gray-900 text-left">{selectedUser.prenom} {selectedUser.nom}</h3>
+                <p className="text-sm text-gray-500 flex items-center gap-1 mt-1 text-left">
+                  <Mail className="w-4 h-4" />
+                  {selectedUser.email}
+                </p>
+                <div className="flex items-center gap-2 mt-2">
+                  {getRoleBadge(selectedUser.role)}
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 border border-green-200">
+                    Actif
+                  </span>
                 </div>
-                <div className="profile-info">
-                  <h3>{selectedUser.prenom} {selectedUser.nom}</h3>
-                  <p>{selectedUser.email}</p>
-                  <div className="profile-badges">
+              </div>
+            </div>
+
+            {/* Details Grid */}
+            <div className="grid grid-cols-1 gap-4">
+              <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <Phone className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                <div className="text-left">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 text-left">Téléphone</label>
+                  <span className="text-sm font-medium text-gray-900">{selectedUser.telephone}</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <Calendar className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                <div className="text-left">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 text-left">Créé le</label>
+                  <span className="text-sm font-medium text-gray-900">{formatDate(selectedUser.createdAt)}</span>
+                </div>
+              </div>
+
+              {selectedUser.lastLogin && (
+                <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <Calendar className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                  <div className="text-left">
+                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 text-left">Dernière connexion</label>
+                    <span className="text-sm font-medium text-gray-900">{formatDate(selectedUser.lastLogin)}</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <Shield className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                <div className="text-left">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 text-left">Rôle</label>
+                  <div className="mt-1">
                     {getRoleBadge(selectedUser.role)}
-                    <span className="status-badge">Actif</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="user-details-grid">
-                <div className="detail-item">
-                  <Phone size={16} />
-                  <div>
-                    <label>Téléphone</label>
-                    <span>{selectedUser.telephone}</span>
-                  </div>
-                </div>
-                
-                <div className="detail-item">
-                  <Calendar size={16} />
-                  <div>
-                    <label>Créé le</label>
-                    <span>{formatDate(selectedUser.createdAt)}</span>
-                  </div>
-                </div>
-                
-                {selectedUser.lastLogin && (
-                  <div className="detail-item">
-                    <Calendar size={16} />
-                    <div>
-                      <label>Dernière connexion</label>
-                      <span>{formatDate(selectedUser.lastLogin)}</span>
-                    </div>
-                  </div>
-                )}
-                
-                <div className="detail-item">
-                  <Shield size={16} />
-                  <div>
-                    <label>Rôle</label>
-                    <span>{selectedUser.role}</span>
                   </div>
                 </div>
               </div>
             </div>
-            
-            <div className="modal-footer">
-              <button 
-                className="btn-secondary"
+
+            {/* Actions */}
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200">
+              <AdminButton
+                variant="outline"
                 onClick={() => setShowUserModal(false)}
               >
                 Fermer
-              </button>
-              <button className="btn-primary">
+              </AdminButton>
+              <AdminButton>
+                <Edit className="w-4 h-4 mr-2" />
                 Modifier l'utilisateur
-              </button>
+              </AdminButton>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </AdminModal>
     </div>
   );
 };

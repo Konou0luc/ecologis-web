@@ -4,29 +4,20 @@ import {
   Bell, 
   Settings, 
   User, 
-  Moon, 
-  Sun, 
-  Menu,
-  ChevronDown
+  ChevronDown,
+  Menu
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useMenu } from '../context/MenuContext';
-import './Header.css';
 
 const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const { user, logout } = useAuth();
   const { toggleMobileMenu } = useMenu();
   const navigate = useNavigate();
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.setAttribute('data-theme', darkMode ? 'light' : 'dark');
-  };
 
   const handleLogout = () => {
     logout();
@@ -49,127 +40,133 @@ const Header: React.FC = () => {
     { id: 3, title: 'Abonnement expirant bientôt', time: '1h', unread: false },
   ];
 
+  const unreadCount = notifications.filter(n => n.unread).length;
+
   return (
-    <header className="admin-header">
-      <div className="header-left">
-        <button 
-          className="mobile-menu-btn"
-          onClick={toggleMobileMenu}
-          aria-label="Ouvrir le menu"
-        >
-          <Menu size={20} />
-        </button>
-        
-        <div className="search-container">
-          <Search size={18} className="search-icon" />
-          <input
-            type="text"
-            placeholder="Rechercher..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-        </div>
-      </div>
-
-      <div className="header-right">
-        {/* Theme Toggle */}
-        <button 
-          className="theme-toggle"
-          onClick={toggleDarkMode}
-          title={darkMode ? 'Mode clair' : 'Mode sombre'}
-        >
-          {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
-
-        {/* Notifications */}
-        <div className="notifications-container">
-          <button 
-            className="notifications-btn"
-            onClick={() => setShowNotifications(!showNotifications)}
+    <header className="sticky top-0 z-30 bg-white border-b border-[#E5E7EB] backdrop-blur-sm bg-opacity-95">
+      <div className="flex items-center justify-between h-16 px-6">
+        {/* Left: Mobile Menu & Search */}
+        <div className="flex items-center gap-4 flex-1">
+          <button
+            onClick={toggleMobileMenu}
+            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[#F5F5F5] transition-colors"
           >
-            <Bell size={18} />
-            {notifications.filter(n => n.unread).length > 0 && (
-              <span className="notification-badge">
-                {notifications.filter(n => n.unread).length}
-              </span>
-            )}
+            <Menu className="w-5 h-5 text-[#111827]" />
           </button>
 
-          {showNotifications && (
-            <div className="notifications-dropdown">
-              <div className="notifications-header">
-                <h3>Notifications</h3>
-                <span className="notifications-count">
-                  {notifications.filter(n => n.unread).length} non lues
+          {/* Search Bar */}
+          <div className="relative flex-1 max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#666666]" />
+            <input
+              type="text"
+              placeholder="Rechercher..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-[#F5F5F5] border border-[#E5E7EB] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FFA800] focus:border-transparent"
+            />
+          </div>
+        </div>
+
+        {/* Right: Notifications & User Menu */}
+        <div className="flex items-center gap-2">
+          {/* Notifications */}
+          <div className="relative">
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="relative flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+            >
+              <Bell className="w-5 h-5 text-[#111827]" />
+              {unreadCount > 0 && (
+                <span className="absolute top-1 right-1 w-2 h-2 bg-[#F44336] rounded-full border-2 border-white" />
+              )}
+            </button>
+
+            {/* Notifications Dropdown */}
+            {showNotifications && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setShowNotifications(false)}
+                />
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-[#E5E7EB] z-20">
+                  <div className="p-4 border-b border-[#E5E7EB]">
+                    <h3 className="font-semibold text-[#111827]">Notifications</h3>
+                  </div>
+                  <div className="max-h-96 overflow-y-auto">
+                    {notifications.map((notification) => (
+                      <div
+                        key={notification.id}
+                        className={`p-4 border-b border-[#E5E7EB] ${
+                          notification.unread ? 'bg-[#F5F5F5]' : ''
+                        }`}
+                      >
+                        <p className="text-sm font-medium text-[#111827]">
+                          {notification.title}
+                        </p>
+                        <p className="text-xs text-[#666666] mt-1">{notification.time}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* User Menu */}
+          <div className="relative">
+            <button
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#FFA800] flex items-center justify-center">
+                <span className="text-black text-sm font-semibold">
+                  {user?.email?.charAt(0).toUpperCase() || 'A'}
                 </span>
               </div>
-              <div className="notifications-list">
-                {notifications.map((notification) => (
-                  <div 
-                    key={notification.id} 
-                    className={`notification-item ${notification.unread ? 'unread' : ''}`}
-                  >
-                    <div className="notification-content">
-                      <div className="notification-title">{notification.title}</div>
-                      <div className="notification-time">{notification.time}</div>
-                    </div>
-                    {notification.unread && <div className="notification-dot"></div>}
+              <ChevronDown className="w-4 h-4 text-[#666666]" />
+            </button>
+
+            {/* User Dropdown */}
+            {showUserMenu && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setShowUserMenu(false)}
+                />
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-[#E5E7EB] z-20">
+                  <div className="p-4 border-b border-[#E5E7EB]">
+                    <p className="text-sm font-semibold text-[#111827]">
+                      {user?.email || 'Admin'}
+                    </p>
+                    <p className="text-xs text-[#666666] mt-1">Administrateur</p>
                   </div>
-                ))}
-              </div>
-              <div className="notifications-footer">
-                <button className="view-all-btn">Voir toutes les notifications</button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* User Menu */}
-        <div className="user-menu-container">
-          <button 
-            className="user-menu-btn"
-            onClick={() => setShowUserMenu(!showUserMenu)}
-          >
-            <div className="user-avatar">
-              {user?.prenom.charAt(0)}{user?.nom.charAt(0)}
-            </div>
-            <div className="user-info">
-              <div className="user-name">{user?.prenom} {user?.nom}</div>
-              <div className="user-role">
-                {user?.role === 'super-admin' ? 'Super Admin' : 'Administrateur'}
-              </div>
-            </div>
-            <ChevronDown size={16} className="chevron" />
-          </button>
-
-          {showUserMenu && (
-            <div className="user-menu-dropdown">
-              <div className="user-menu-header">
-                <div className="user-avatar-large">
-                  {user?.prenom.charAt(0)}{user?.nom.charAt(0)}
+                  <div className="py-2">
+                    <button
+                      onClick={handleProfileClick}
+                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-[#111827] hover:bg-[#F5F5F5] transition-colors"
+                    >
+                      <User className="w-4 h-4" />
+                      <span>Profil</span>
+                    </button>
+                    <button
+                      onClick={handleSettingsClick}
+                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-[#111827] hover:bg-[#F5F5F5] transition-colors"
+                    >
+                      <Settings className="w-4 h-4" />
+                      <span>Paramètres</span>
+                    </button>
+                    <div className="border-t border-[#E5E7EB] my-2" />
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-[#F44336] hover:bg-[#FEF2F2] transition-colors"
+                    >
+                      <span>Déconnexion</span>
+                    </button>
+                  </div>
                 </div>
-                <div className="user-details">
-                  <div className="user-name-large">{user?.prenom} {user?.nom}</div>
-                  <div className="user-email">{user?.email}</div>
-                </div>
-              </div>
-              <div className="user-menu-items">
-                <button className="user-menu-item" onClick={handleProfileClick}>
-                  <User size={16} />
-                  <span>Profil</span>
-                </button>
-                <button className="user-menu-item" onClick={handleSettingsClick}>
-                  <Settings size={16} />
-                  <span>Paramètres</span>
-                </button>
-                <hr className="user-menu-divider" />
-                <button className="user-menu-item logout" onClick={handleLogout}>
-                  <span>Déconnexion</span>
-                </button>
-              </div>
-            </div>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </header>

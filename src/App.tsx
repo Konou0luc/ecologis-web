@@ -12,6 +12,7 @@ import ThemeToggle from './components/ThemeToggle';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import LegalInfo from './components/LegalInfo';
+import GuideRapide from './components/GuideRapide';
 import AdminApp from './admin/AdminApp';
 import Login from './admin/pages/Login';
 import { AuthProvider } from './admin/context/AuthContext';
@@ -62,6 +63,16 @@ function App() {
                 <Header />
                 <main>
                   <LegalInfo />
+                </main>
+                <Footer />
+                <ThemeToggle />
+              </>
+            } />
+            <Route path="/guide-rapide" element={
+              <>
+                <Header />
+                <main>
+                  <GuideRapide />
                 </main>
                 <Footer />
                 <ThemeToggle />

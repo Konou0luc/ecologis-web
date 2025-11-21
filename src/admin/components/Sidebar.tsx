@@ -13,13 +13,11 @@ import {
   FileText, 
   Settings,
   ChevronLeft,
-  ChevronRight,
   LogOut,
   X
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useMenu } from '../context/MenuContext';
-import './Sidebar.css';
 
 interface MenuItem {
   id: string;
@@ -49,111 +47,113 @@ const Sidebar: React.FC = () => {
   const { user, logout } = useAuth();
   const { isMobileMenuOpen, closeMobileMenu } = useMenu();
 
-  const handleLogout = () => {
-    logout();
+  const isActive = (path: string) => {
+    const currentPath = location.pathname.replace('/admin', '');
+    return currentPath === `/${path}` || (path === 'dashboard' && currentPath === '/');
   };
 
   return (
     <>
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
-        <div 
-          className="mobile-menu-overlay"
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={closeMobileMenu}
         />
       )}
-      
-      <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-      {/* Header */}
-      <div className="sidebar-header">
-        <div className="sidebar-logo">
-          <div className="logo-icon">
-            <Zap size={24} />
-          </div>
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed top-0 left-0 h-full bg-[#262626] text-white z-50
+          transition-all duration-300 ease-in-out
+          ${collapsed ? 'w-20' : 'w-64'}
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+      >
+        {/* Logo & Toggle */}
+        <div className="flex items-center justify-between h-16 px-4 border-b border-[#333333]">
           {!collapsed && (
-            <div className="logo-text">
-              <span className="logo-title">Ecopower</span>
-              <span className="logo-subtitle">Admin</span>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[#FFA800] rounded-lg flex items-center justify-center">
+                <Zap className="w-4 h-4 text-black" />
+              </div>
+              <span className="font-bold text-base">Ecopower</span>
             </div>
           )}
-        </div>
-        <div className="sidebar-toggle-container">
-          <button 
-            className="sidebar-toggle"
-            onClick={() => setCollapsed(!collapsed)}
-          >
-            {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
-          </button>
-          
-          {/* Mobile Close Button */}
-          <button 
-            className="mobile-close-btn"
-            onClick={closeMobileMenu}
-            aria-label="Fermer le menu"
-          >
-            <X size={20} />
-          </button>
-        </div>
-      </div>
-
-      {/* User Info */}
-      {!collapsed && user && (
-        <div className="sidebar-user">
-          <div className="user-avatar">
-            {user.prenom.charAt(0)}{user.nom.charAt(0)}
-          </div>
-          <div className="user-info">
-            <div className="user-name">{user.prenom} {user.nom}</div>
-            <div className="user-role">
-              {user.role === 'super-admin' ? 'Super Admin' : 'Administrateur'}
+          {collapsed && (
+            <div className="w-8 h-8 bg-[#FFA800] rounded-lg flex items-center justify-center mx-auto">
+              <Zap className="w-5 h-5 text-black" />
             </div>
-          </div>
+          )}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#333333] transition-colors"
+          >
+            <ChevronLeft className={`w-5 h-5 transition-transform ${collapsed ? 'rotate-180' : ''}`} />
+          </button>
+          <button
+            onClick={closeMobileMenu}
+            className="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#333333] transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
-      )}
 
-      {/* Navigation */}
-      <nav className="sidebar-nav">
-        <ul className="nav-list">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = location.pathname.endsWith(item.path) || (item.path === 'dashboard' && location.pathname.endsWith('/admin'));
-            
-            return (
-              <li key={item.id} className="nav-item">
-                <Link 
-                  to={item.path} 
-                  className={`nav-link ${isActive ? 'active' : ''}`}
-                  title={collapsed ? item.label : undefined}
+        {/* Navigation */}
+        <nav className="flex-1 overflow-y-auto py-4">
+          <div className="px-3 space-y-1">
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const active = isActive(item.path);
+              
+              return (
+                <Link
+                  key={item.id}
+                  to={`/admin/${item.path}`}
                   onClick={closeMobileMenu}
+                  className={`
+                    flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-sm
+                    ${active 
+                      ? 'bg-[#FFA800] text-black' 
+                      : 'text-[#B0B0B0] hover:bg-[#333333] hover:text-white'
+                    }
+                    ${collapsed ? 'justify-center' : ''}
+                  `}
                 >
-                  <div className="nav-icon">
-                    <Icon size={20} />
-                    {item.badge && item.badge > 0 && (
-                      <span className="nav-badge">{item.badge}</span>
-                    )}
-                  </div>
+                  <Icon className="w-4 h-4 flex-shrink-0" />
                   {!collapsed && (
-                    <span className="nav-label">{item.label}</span>
+                    <>
+                      <span className="flex-1 font-medium text-left">{item.label}</span>
+                      {item.badge && (
+                        <span className="px-1.5 py-0.5 text-xs font-semibold bg-[#F44336] text-white rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </>
                   )}
                 </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+              );
+            })}
+          </div>
+        </nav>
 
-      {/* Footer */}
-      <div className="sidebar-footer">
-        <button 
-          className="logout-btn"
-          onClick={handleLogout}
-          title={collapsed ? 'Déconnexion' : undefined}
-        >
-          <LogOut size={20} />
-          {!collapsed && <span>Déconnexion</span>}
-        </button>
-      </div>
-    </aside>
+        {/* Logout Section */}
+        <div className="border-t border-[#333333] p-3">
+          <button
+            onClick={logout}
+            className={`
+              w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+              text-[#B0B0B0] hover:bg-[#333333] hover:text-white transition-colors
+              ${collapsed ? 'justify-center' : ''}
+            `}
+            title={collapsed ? 'Déconnexion' : undefined}
+          >
+            <LogOut className="w-4 h-4 flex-shrink-0" />
+            {!collapsed && <span>Déconnexion</span>}
+          </button>
+        </div>
+      </aside>
     </>
   );
 };

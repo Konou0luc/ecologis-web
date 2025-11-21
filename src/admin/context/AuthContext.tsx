@@ -22,7 +22,11 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const API_BASE_URL = 'https://ecopower-api.vercel.app';
+// Utiliser le proxy en développement pour éviter les problèmes CORS
+// Le proxy redirige /auth et /admin vers l'API Vercel
+const API_BASE_URL = process.env.NODE_ENV === 'development' 
+  ? '' // Utiliser le proxy setupProxy.js
+  : 'https://ecopower-api.vercel.app';
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -55,63 +59,74 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      console.log('🔐 [FRONTEND] Tentative de connexion pour:', email);
-      console.log('🔐 [FRONTEND] URL:', `${API_BASE_URL}/auth/login`);
+      // Construire l'URL : utiliser le proxy en dev, URL directe en prod
+      const url = API_BASE_URL ? `${API_BASE_URL}/auth/login` : '/auth/login';
       
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           email,
           motDePasse: password,
         }),
+        credentials: 'same-origin', // Important pour le proxy
       });
+      
+      // Vérifier le Content-Type avant de parser
+      const contentType = response.headers.get('content-type');
+      const isJson = contentType && contentType.includes('application/json');
 
-      console.log('🔐 [FRONTEND] Réponse status:', response.status);
-      console.log('🔐 [FRONTEND] Réponse ok:', response.ok);
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('🔐 [FRONTEND] Données reçues:', { 
-          user: data.user?.email, 
-          role: data.user?.role,
-          hasToken: !!data.accessToken 
+      // Lire la réponse (texte ou JSON)
+      let data: any;
+      let responseText: string | null = null;
+      
+      if (isJson) {
+        try {
+          data = await response.json();
+        } catch (parseError) {
+          console.error('❌ [FRONTEND] Erreur de parsing JSON:', parseError);
+          throw new Error('Réponse JSON invalide du serveur');
+        }
+      } else {
+        // Si ce n'est pas du JSON, lire le texte
+        responseText = await response.text();
+        console.error('❌ [FRONTEND] Réponse non-JSON reçue:', {
+          status: response.status,
+          contentType,
+          preview: responseText.substring(0, 200)
         });
         
+        if (response.status === 401 || response.status === 403) {
+          throw new Error('Token d\'accès requis ou expiré');
+        }
+        
+        throw new Error('Le serveur a retourné une réponse invalide. Vérifiez que l\'API est correctement configurée.');
+      }
+
+      if (response.ok) {
         // Vérifier si l'utilisateur a les droits admin
         if (data.user && (data.user.role === 'admin' || data.user.role === 'super-admin')) {
           setUser(data.user);
           localStorage.setItem('admin_access_token', data.accessToken);
           localStorage.setItem('admin_refresh_token', data.refreshToken);
           localStorage.setItem('admin_user', JSON.stringify(data.user));
-          console.log('✅ [FRONTEND] Connexion réussie pour admin');
           return true;
         } else {
-          console.log('❌ [FRONTEND] Utilisateur sans droits admin. Role:', data.user?.role);
           throw new Error('Accès refusé. Droits administrateur requis.');
         }
       } else {
-        let errorMessage = 'Erreur de connexion';
-        try {
-          const errorData = await response.json();
-          errorMessage = errorData.message || `Erreur HTTP ${response.status}`;
-          console.log('❌ [FRONTEND] Erreur serveur:', errorMessage);
-        } catch (e) {
-          console.log('❌ [FRONTEND] Impossible de parser la réponse d\'erreur');
-          errorMessage = `Erreur HTTP ${response.status}: ${response.statusText}`;
-        }
+        // Erreur HTTP
+        const errorMessage = data?.message || `Erreur HTTP ${response.status}: ${response.statusText}`;
         throw new Error(errorMessage);
       }
     } catch (error: any) {
-      console.error('💥 [FRONTEND] Erreur de connexion:', error);
-      console.error('💥 [FRONTEND] Message:', error.message);
-      console.error('💥 [FRONTEND] Stack:', error.stack);
+      console.error('Erreur de connexion:', error.message);
       
       // Si c'est une erreur réseau
       if (error.name === 'TypeError' && error.message.includes('fetch')) {
-        console.error('💥 [FRONTEND] Erreur réseau - Le serveur n\'est pas accessible');
         throw new Error('Impossible de se connecter au serveur. Vérifiez votre connexion internet et que l\'API est accessible.');
       }
       
@@ -131,21 +146,39 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const refreshTokenValue = localStorage.getItem('admin_refresh_token');
       if (!refreshTokenValue) return false;
 
-      const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
+      const url = API_BASE_URL ? `${API_BASE_URL}/auth/refresh` : '/auth/refresh';
+      
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           refreshToken: refreshTokenValue,
         }),
+        credentials: 'same-origin',
       });
 
-      if (response.ok) {
+      // Vérifier le Content-Type avant de parser
+      const contentType = response.headers.get('content-type');
+      const isJson = contentType && contentType.includes('application/json');
+
+      if (response.ok && isJson) {
+        try {
         const data = await response.json();
         localStorage.setItem('admin_access_token', data.accessToken);
         return true;
+        } catch (parseError) {
+          console.error('Erreur de parsing JSON lors du refresh token:', parseError);
+          logout();
+          return false;
+        }
       } else {
+        if (!isJson) {
+          const text = await response.text();
+          console.error('Réponse non-JSON lors du refresh token:', text.substring(0, 200));
+        }
         logout();
         return false;
       }

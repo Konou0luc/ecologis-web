@@ -1,4 +1,7 @@
-const API_BASE_URL = 'https://ecopower-api.vercel.app';
+// Utiliser le proxy en développement pour éviter les problèmes CORS
+const API_BASE_URL = process.env.NODE_ENV === 'development' 
+  ? '' // Utiliser le proxy setupProxy.js
+  : 'https://ecopower-api.vercel.app';
 
 interface ApiResponse<T> {
   data?: T;
@@ -386,26 +389,109 @@ class ApiService {
   ): Promise<ApiResponse<T>> {
     const token = this.getAuthToken();
     
+    // Si pas de token et que c'est une route admin (sauf auth), retourner une erreur
+    if (!token && endpoint.startsWith('/admin') && !endpoint.startsWith('/auth')) {
+      console.warn('⚠️ [API] Tentative d\'accès à une route admin sans token:', endpoint);
+      return {
+        error: 'Token d\'accès requis. Veuillez vous connecter.'
+      };
+    }
+    
+    // Construire les headers de manière explicite
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    
+    // Ajouter le token si présent
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    // Fusionner avec les headers optionnels (les options.headers peuvent écraser les headers par défaut)
+    const optionsHeaders = options.headers as Record<string, string> | undefined;
+    const finalHeaders: HeadersInit = optionsHeaders 
+      ? { ...headers, ...optionsHeaders }
+      : headers;
+    
     const config: RequestInit = {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token && { Authorization: `Bearer ${token}` }),
-        ...options.headers,
-      },
       ...options,
+      headers: finalHeaders,
     };
 
     try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-      const data = await response.json();
+      const url = API_BASE_URL ? `${API_BASE_URL}${endpoint}` : endpoint;
+      
+      const response = await fetch(url, {
+        ...config,
+        credentials: 'same-origin', // Important pour le proxy
+      });
+
+      // Vérifier le Content-Type avant de parser
+      const contentType = response.headers.get('content-type');
+      const isJson = contentType && contentType.includes('application/json');
+
+      let data: any;
+      
+      if (!isJson) {
+        // Si ce n'est pas du JSON, lire le texte pour voir ce qui a été retourné
+        const text = await response.text();
+        console.error('❌ [API] Réponse non-JSON reçue:', {
+          status: response.status,
+          statusText: response.statusText,
+          contentType,
+          preview: text.substring(0, 200)
+        });
+        
+        if (response.status === 401 || response.status === 403) {
+          throw new Error('Token d\'accès requis ou expiré');
+        }
+        
+        throw new Error(`Réponse invalide du serveur (${response.status}). Attendu JSON, reçu ${contentType || 'inconnu'}`);
+      }
+
+      // Parser le JSON seulement si c'est du JSON
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error('❌ [API] Erreur de parsing JSON:', parseError);
+        throw new Error('Réponse JSON invalide du serveur');
+      }
 
       if (!response.ok) {
-        throw new Error(data.message || 'Erreur de l\'API');
+        throw new Error(data?.message || `Erreur HTTP ${response.status}: ${response.statusText}`);
       }
 
       return { data };
     } catch (error) {
-      console.error('Erreur API:', error);
+      console.error('❌ [API] Erreur:', error);
+      
+      // Si c'est une erreur de parsing JSON ou de réseau
+      if (error instanceof SyntaxError || error instanceof TypeError) {
+        // Vérifier si c'est une erreur réseau
+        if (error instanceof TypeError && error.message.includes('fetch')) {
+          return { 
+            error: 'Erreur de connexion. Vérifiez votre connexion internet et que l\'API est accessible.'
+          };
+        }
+        return { 
+          error: 'Réponse invalide du serveur. Le serveur n\'a pas retourné de JSON valide.'
+        };
+      }
+      
+      // Si c'est une erreur 401/403, nettoyer le token
+      if (error instanceof Error && (
+        error.message.includes('Token d\'accès requis') || 
+        error.message.includes('401') || 
+        error.message.includes('403')
+      )) {
+        // Nettoyer le localStorage et rediriger vers login
+        localStorage.removeItem('admin_access_token');
+        localStorage.removeItem('admin_refresh_token');
+        localStorage.removeItem('admin_user');
+        // Ne pas rediriger ici, laisser le composant gérer
+      }
+      
       return { 
         error: error instanceof Error ? error.message : 'Erreur inconnue' 
       };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Zap, Eye, EyeOff, AlertCircle, Smartphone, Shield, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Zap, Eye, EyeOff, AlertCircle, Shield, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useNotifications } from '../../hooks/useNotifications';
 import NotificationContainer from '../../components/NotificationContainer';
@@ -12,6 +13,7 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { login } = useAuth();
+  const navigate = useNavigate();
   const { notifications, removeNotification, showError, showSuccess, showWarning, showInfo } = useNotifications();
 
   // Notification de bienvenue au chargement de la page
@@ -51,20 +53,19 @@ const Login: React.FC = () => {
     }
 
     try {
-      console.log('🔐 [LOGIN PAGE] Tentative de connexion...');
       const success = await login(email, password);
-      console.log('🔐 [LOGIN PAGE] Résultat:', success);
       if (success) {
         showSuccess('Connexion réussie', 'Vous êtes maintenant connecté à votre compte administrateur.');
         // Redirection après un court délai pour laisser le temps de voir la notification
+        // Utiliser navigate au lieu de window.location.href pour rester dans l'application React
         setTimeout(() => {
-          window.location.href = '/admin';
+          navigate('/admin/dashboard', { replace: true });
         }, 1500);
       } else {
         showError('Échec de la connexion', 'Email ou mot de passe incorrect, ou accès administrateur requis.');
       }
     } catch (err: any) {
-      console.error('💥 [LOGIN PAGE] Erreur capturée:', err);
+      console.error('Erreur de connexion:', err.message);
       // Gestion des erreurs spécifiques du serveur
       let errorMessage = 'Une erreur est survenue lors de la connexion. Veuillez réessayer.';
       let errorTitle = 'Erreur de connexion';
