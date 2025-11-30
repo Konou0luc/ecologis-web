@@ -2,11 +2,7 @@
   "rewrites": [
     {
       "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
+      "destination": "/api/sitemap.xml"
     },
     {
       "source": "/(.*)",
@@ -15,7 +11,7 @@
   ],
   "headers": [
     {
-      "source": "/sitemap.xml",
+      "source": "/api/sitemap.xml",
       "headers": [
         {
           "key": "Content-Type",
@@ -24,6 +20,10 @@
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=3600, stale-while-revalidate=86400"
         }
       ]
     },
