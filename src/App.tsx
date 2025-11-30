@@ -17,6 +17,8 @@ import AdminApp from './admin/AdminApp';
 import Login from './admin/pages/Login';
 import { AuthProvider } from './admin/context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import SEO from './components/SEO';
+import { generateHomePageSchema, generateBreadcrumbSchema, generateWebPageSchema } from './utils/seoUtils';
 import './App.css';
 
 function App() {
@@ -26,20 +28,75 @@ function App() {
         <div className="App">
           <Routes>
             {/* Route pour le backoffice admin */}
-            <Route path="/admin/*" element={<AdminApp />} />
-            <Route path="/profile" element={<AdminApp />} />
-            <Route path="/settings" element={<AdminApp />} />
+            <Route path="/admin/*" element={
+              <>
+                <SEO
+                  title="Administration | Ecopower"
+                  description="Espace d'administration Ecopower"
+                  canonical="/admin"
+                  noindex={true}
+                />
+                <AdminApp />
+              </>
+            } />
+            <Route path="/profile" element={
+              <>
+                <SEO
+                  title="Profil | Ecopower"
+                  description="Gérez votre profil Ecopower"
+                  canonical="/profile"
+                  noindex={true}
+                />
+                <AdminApp />
+              </>
+            } />
+            <Route path="/settings" element={
+              <>
+                <SEO
+                  title="Paramètres | Ecopower"
+                  description="Paramètres de votre compte Ecopower"
+                  canonical="/settings"
+                  noindex={true}
+                />
+                <AdminApp />
+              </>
+            } />
             
             {/* Route pour la page de login */}
             <Route path="/login" element={
+              <>
+                <SEO
+                  title="Connexion | Ecopower"
+                  description="Connectez-vous à votre espace Ecopower"
+                  canonical="/login"
+                  noindex={true}
+                />
               <AuthProvider>
                 <Login />
               </AuthProvider>
+              </>
             } />
             
             {/* Routes pour les pages légales */}
             <Route path="/privacy-policy" element={
               <>
+                <SEO
+                  title="Politique de Confidentialité | Ecopower"
+                  description="Politique de confidentialité d'Ecopower. Découvrez comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD et aux lois togolaises."
+                  canonical="/privacy-policy"
+                  keywords="politique de confidentialité, protection des données, RGPD, vie privée, données personnelles, Ecopower"
+                  jsonLd={[
+                    generateWebPageSchema(
+                      "Politique de Confidentialité - Ecopower",
+                      "Politique de confidentialité d'Ecopower. Découvrez comment nous collectons, utilisons et protégeons vos données personnelles.",
+                      "/privacy-policy"
+                    ),
+                    generateBreadcrumbSchema([
+                      { name: "Accueil", url: "/" },
+                      { name: "Politique de Confidentialité", url: "/privacy-policy" }
+                    ])
+                  ]}
+                />
                 <Header />
                 <main>
                   <PrivacyPolicy />
@@ -50,6 +107,23 @@ function App() {
             } />
             <Route path="/terms-of-service" element={
               <>
+                <SEO
+                  title="Conditions d'Utilisation | Ecopower"
+                  description="Conditions générales d'utilisation de la plateforme Ecopower. Consultez les termes et conditions qui régissent l'utilisation de nos services de gestion de consommation électrique."
+                  canonical="/terms-of-service"
+                  keywords="conditions d'utilisation, CGU, termes de service, conditions générales, Ecopower, législation"
+                  jsonLd={[
+                    generateWebPageSchema(
+                      "Conditions d'Utilisation - Ecopower",
+                      "Conditions générales d'utilisation de la plateforme Ecopower. Consultez les termes et conditions qui régissent l'utilisation de nos services.",
+                      "/terms-of-service"
+                    ),
+                    generateBreadcrumbSchema([
+                      { name: "Accueil", url: "/" },
+                      { name: "Conditions d'Utilisation", url: "/terms-of-service" }
+                    ])
+                  ]}
+                />
                 <Header />
                 <main>
                   <TermsOfService />
@@ -60,6 +134,23 @@ function App() {
             } />
             <Route path="/legal-info" element={
               <>
+                <SEO
+                  title="Informations Légales | Ecopower"
+                  description="Informations légales et mentions légales d'Ecopower. Coordonnées de l'entreprise, numéro SIRET, adresse, directeur de publication et hébergeur."
+                  canonical="/legal-info"
+                  keywords="informations légales, mentions légales, entreprise, contact, Ecopower, Togo"
+                  jsonLd={[
+                    generateWebPageSchema(
+                      "Informations Légales - Ecopower",
+                      "Informations légales et mentions légales d'Ecopower. Coordonnées de l'entreprise, numéro SIRET, adresse, directeur de publication.",
+                      "/legal-info"
+                    ),
+                    generateBreadcrumbSchema([
+                      { name: "Accueil", url: "/" },
+                      { name: "Informations Légales", url: "/legal-info" }
+                    ])
+                  ]}
+                />
                 <Header />
                 <main>
                   <LegalInfo />
@@ -70,6 +161,23 @@ function App() {
             } />
             <Route path="/guide-rapide" element={
               <>
+                <SEO
+                  title="Guide Rapide - Comment utiliser Ecopower | Tutoriel"
+                  description="Guide rapide et tutoriel complet pour utiliser Ecopower. Découvrez comment gérer votre consommation électrique, créer des factures, ajouter des résidents et optimiser vos coûts énergétiques."
+                  canonical="/guide-rapide"
+                  keywords="guide rapide, tutoriel, aide, documentation, comment utiliser Ecopower, guide utilisateur, formation"
+                  jsonLd={[
+                    generateWebPageSchema(
+                      "Guide Rapide - Ecopower",
+                      "Guide rapide et tutoriel complet pour utiliser Ecopower. Découvrez comment gérer votre consommation électrique efficacement.",
+                      "/guide-rapide"
+                    ),
+                    generateBreadcrumbSchema([
+                      { name: "Accueil", url: "/" },
+                      { name: "Guide Rapide", url: "/guide-rapide" }
+                    ])
+                  ]}
+                />
                 <Header />
                 <main>
                   <GuideRapide />
@@ -82,6 +190,13 @@ function App() {
             {/* Routes pour le site principal */}
             <Route path="/" element={
               <>
+                <SEO
+                  title="Ecopower - Gestion de Consommation Électrique | Solution Intelligente au Togo"
+                  description="Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo. Suivez votre consommation en temps réel, générez des factures automatiquement, optimisez vos coûts énergétiques avec Ecopower."
+                  canonical="/"
+                  keywords="ecopower, gestion électrique, factures, consommation, énergie, Togo, Lomé, gestion résidentielle, suivi consommation, facturation automatique, gestion énergétique, économie d'énergie, consommation électrique Togo"
+                  jsonLd={generateHomePageSchema()}
+                />
                 <Header />
                 <main>
                   <Hero />
@@ -97,6 +212,12 @@ function App() {
             } />
             <Route path="/*" element={
               <>
+                <SEO
+                  title="Ecopower - Gestion de Consommation Électrique | Solution Intelligente au Togo"
+                  description="Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo. Suivez votre consommation en temps réel, générez des factures automatiquement, optimisez vos coûts énergétiques avec Ecopower."
+                  canonical="/"
+                  keywords="ecopower, gestion électrique, factures, consommation, énergie, Togo, Lomé"
+                />
                 <Header />
                 <main>
                   <Hero />

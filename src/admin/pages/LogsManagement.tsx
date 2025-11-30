@@ -315,7 +315,7 @@ const LogsManagement: React.FC = () => {
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <FileText className="w-6 h-6 text-blue-600" />
-              </div>
+          </div>
             </div>
           </AdminCardContent>
         </AdminCard>
@@ -330,10 +330,10 @@ const LogsManagement: React.FC = () => {
                   <AlertTriangle className="w-3.5 h-3.5" />
                   <span>À surveiller</span>
                 </p>
-              </div>
+          </div>
               <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
                 <AlertTriangle className="w-6 h-6 text-red-600" />
-              </div>
+          </div>
             </div>
           </AdminCardContent>
         </AdminCard>
@@ -348,10 +348,10 @@ const LogsManagement: React.FC = () => {
                   <CheckCircle className="w-3.5 h-3.5" />
                   <span>Excellent</span>
                 </p>
-              </div>
+          </div>
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                 <CheckCircle className="w-6 h-6 text-green-600" />
-              </div>
+          </div>
             </div>
           </AdminCardContent>
         </AdminCard>
@@ -366,10 +366,10 @@ const LogsManagement: React.FC = () => {
                   <CheckCircle className="w-3.5 h-3.5" />
                   <span>Rapide</span>
                 </p>
-              </div>
+          </div>
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                 <Info className="w-6 h-6 text-purple-600" />
-              </div>
+          </div>
             </div>
           </AdminCardContent>
         </AdminCard>
@@ -381,45 +381,45 @@ const LogsManagement: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Rechercher dans les logs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+          <input
+            type="text"
+            placeholder="Rechercher dans les logs..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-            
-            <select
-              value={levelFilter}
-              onChange={(e) => setLevelFilter(e.target.value)}
+          />
+        </div>
+        
+          <select 
+            value={levelFilter}
+            onChange={(e) => setLevelFilter(e.target.value)}
               aria-label="Filtrer par niveau"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-            >
-              <option value="all">Tous les niveaux</option>
-              <option value="debug">Debug</option>
-              <option value="info">Info</option>
-              <option value="warn">Warning</option>
-              <option value="error">Error</option>
-              <option value="fatal">Fatal</option>
-            </select>
+          >
+            <option value="all">Tous les niveaux</option>
+            <option value="debug">Debug</option>
+            <option value="info">Info</option>
+            <option value="warn">Warning</option>
+            <option value="error">Error</option>
+            <option value="fatal">Fatal</option>
+          </select>
 
-            <input
-              type="date"
-              value={dateFrom}
-              onChange={(e) => setDateFrom(e.target.value)}
-              placeholder="Date de début"
+          <input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+            placeholder="Date de début"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-            />
+          />
 
-            <input
-              type="date"
-              value={dateTo}
-              onChange={(e) => setDateTo(e.target.value)}
-              placeholder="Date de fin"
+          <input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+            placeholder="Date de fin"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-            />
-          </div>
+          />
+        </div>
         </AdminCardContent>
       </AdminCard>
 
@@ -435,7 +435,7 @@ const LogsManagement: React.FC = () => {
           {error && (
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
               {error}
-            </div>
+      </div>
           )}
 
           {loading ? (
@@ -533,8 +533,8 @@ const LogsManagement: React.FC = () => {
                                 {log.user.prenom} {log.user.nom}
                               </div>
                               <div className="text-sm text-gray-500">{log.user.email}</div>
-                            </div>
-                          </div>
+          </div>
+        </div>
                         ) : (
                           <span className="text-gray-500 text-sm">Système</span>
                         )}
@@ -557,7 +557,7 @@ const LogsManagement: React.FC = () => {
                   ))}
                 </AdminTableBody>
               </AdminTable>
-            </div>
+          </div>
           )}
 
           {/* Pagination */}
@@ -565,7 +565,7 @@ const LogsManagement: React.FC = () => {
             <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-200">
               <div className="text-sm text-gray-600">
                 Page {pagination.page} sur {pagination.pages}
-              </div>
+                </div>
               <div className="flex gap-2">
                 <AdminButton
                   variant="outline"
@@ -607,7 +607,7 @@ const LogsManagement: React.FC = () => {
                   {getLevelBadge(selectedLog.level)}
                 </div>
               </div>
-            </div>
+              </div>
 
             {/* Module et Action */}
             <div className="grid grid-cols-2 gap-4">
@@ -615,7 +615,7 @@ const LogsManagement: React.FC = () => {
                 <h3 className="text-sm font-semibold text-gray-700 mb-2.5 text-left">Module</h3>
                 <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                   <div className="font-semibold text-gray-900 text-left">{selectedLog.module}</div>
-                </div>
+                  </div>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-700 mb-2.5 text-left">Action</h3>
@@ -623,7 +623,7 @@ const LogsManagement: React.FC = () => {
                   <div className="font-semibold text-gray-900 text-left">{selectedLog.action}</div>
                 </div>
               </div>
-            </div>
+              </div>
 
             {/* Message */}
             <div>
@@ -651,9 +651,9 @@ const LogsManagement: React.FC = () => {
                       <div className="text-sm text-gray-600">{selectedLog.user.email}</div>
                     </div>
                   </div>
-                </div>
-              </div>
-            )}
+        </div>
+          </div>
+        )}
 
             {/* Informations techniques */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -663,8 +663,8 @@ const LogsManagement: React.FC = () => {
                   <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                     <div className="text-gray-900 text-left">{selectedLog.ip}</div>
                   </div>
-                </div>
-              )}
+          </div>
+        )}
               <div>
                 <h3 className="text-sm font-semibold text-gray-700 mb-2.5 text-left">Date</h3>
                 <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
@@ -674,7 +674,7 @@ const LogsManagement: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
+          </div>
 
             {selectedLog.userAgent && (
               <div>
@@ -682,9 +682,9 @@ const LogsManagement: React.FC = () => {
                 <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                   <div className="text-gray-900 text-left break-words text-sm">{selectedLog.userAgent}</div>
                 </div>
-              </div>
-            )}
           </div>
+        )}
+      </div>
         </AdminModal>
       )}
     </div>

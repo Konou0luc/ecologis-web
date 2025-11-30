@@ -218,17 +218,17 @@ const SettingsManagement: React.FC = () => {
           <p className="text-sm text-gray-500">Configurez les paramètres de la plateforme</p>
         </div>
         <AdminButton onClick={handleSave} disabled={saving}>
-          {saving ? (
+            {saving ? (
             <>
               <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
               Sauvegarde...
             </>
-          ) : (
+            ) : (
             <>
               <Save className="w-4 h-4 mr-2" />
               Sauvegarder
             </>
-          )}
+            )}
         </AdminButton>
       </div>
 
@@ -374,13 +374,13 @@ const SettingsManagement: React.FC = () => {
               />
             </div>
             <div className="flex items-center">
-              <input 
-                id="require-two-factor"
-                type="checkbox" 
-                checked={settings.security.requireTwoFactor}
-                onChange={(e) => handleInputChange('security', 'requireTwoFactor', e.target.checked)}
+                <input 
+                  id="require-two-factor"
+                  type="checkbox" 
+                  checked={settings.security.requireTwoFactor}
+                  onChange={(e) => handleInputChange('security', 'requireTwoFactor', e.target.checked)}
                 className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
-              />
+                />
               <label htmlFor="require-two-factor" className="ml-2 text-sm font-medium text-gray-700 text-left">
                 Activer l'authentification à deux facteurs
               </label>
@@ -511,21 +511,21 @@ const SettingsManagement: React.FC = () => {
                     Clé Firebase
                   </label>
                   <div className="relative">
-                    <input 
-                      id="firebase-key"
-                      type={showPasswords.firebase ? 'text' : 'password'}
-                      value={settings.notifications.push.firebaseKey}
+                      <input 
+                        id="firebase-key"
+                        type={showPasswords.firebase ? 'text' : 'password'}
+                        value={settings.notifications.push.firebaseKey}
                       onChange={(e) => handleNestedInputChange('notifications', 'push', 'firebaseKey', e.target.value)}
-                      placeholder="Entrez la clé Firebase"
+                        placeholder="Entrez la clé Firebase"
                       className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                    />
-                    <button 
-                      type="button"
-                      onClick={() => togglePasswordVisibility('firebase')}
+                      />
+                      <button 
+                        type="button"
+                        onClick={() => togglePasswordVisibility('firebase')}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                    >
+                      >
                       {showPasswords.firebase ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                    </button>
+                      </button>
                   </div>
                 </div>
               )}
@@ -666,13 +666,13 @@ const SettingsManagement: React.FC = () => {
               </select>
             </div>
             <div className="flex items-center">
-              <input 
-                id="maintenance-mode"
-                type="checkbox" 
-                checked={settings.general.maintenanceMode}
-                onChange={(e) => handleInputChange('general', 'maintenanceMode', e.target.checked)}
+                <input 
+                  id="maintenance-mode"
+                  type="checkbox" 
+                  checked={settings.general.maintenanceMode}
+                  onChange={(e) => handleInputChange('general', 'maintenanceMode', e.target.checked)}
                 className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
-              />
+                />
               <label htmlFor="maintenance-mode" className="ml-2 text-sm font-medium text-gray-700 text-left">
                 Mode maintenance
               </label>
@@ -750,7 +750,7 @@ const SettingsManagement: React.FC = () => {
             </div>
             <div className="text-left">
               <AdminCardTitle className="text-left">Informations système</AdminCardTitle>
-            </div>
+        </div>
           </div>
         </AdminCardHeader>
         <AdminCardContent>
@@ -758,34 +758,34 @@ const SettingsManagement: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-500 mb-1 text-left">Version de l'API</label>
               <span className="text-base font-semibold text-gray-900">{systemInfo?.version?.api || '1.0.0'}</span>
-            </div>
+          </div>
             <div>
               <label className="block text-sm font-medium text-gray-500 mb-1 text-left">Version de Node.js</label>
               <span className="text-base font-semibold text-gray-900">{systemInfo?.version?.node || '18.17.0'}</span>
-            </div>
+          </div>
             <div>
               <label className="block text-sm font-medium text-gray-500 mb-1 text-left">Uptime</label>
               <span className="text-base font-semibold text-gray-900">
                 {systemInfo?.uptime ? `${systemInfo.uptime.days}j ${systemInfo.uptime.hours}h ${systemInfo.uptime.minutes}m` : '15 jours, 3 heures'}
               </span>
-            </div>
+          </div>
             <div>
               <label className="block text-sm font-medium text-gray-500 mb-1 text-left">Mémoire utilisée</label>
               <span className="text-base font-semibold text-gray-900">
                 {systemInfo?.memory ? `${systemInfo.memory.used} / ${systemInfo.memory.total}` : '245 MB / 512 MB'}
               </span>
-            </div>
+          </div>
             <div>
               <label className="block text-sm font-medium text-gray-500 mb-1 text-left">Base de données</label>
               <span className="text-base font-semibold text-gray-900">
                 {systemInfo?.database ? `${systemInfo.database.type} ${systemInfo.database.version}` : 'MongoDB 6.0'}
               </span>
-            </div>
+          </div>
             <div>
               <label className="block text-sm font-medium text-gray-500 mb-1 text-left">Environnement</label>
               <span className="text-base font-semibold text-gray-900">{systemInfo?.environment || 'Production'}</span>
-            </div>
-          </div>
+        </div>
+      </div>
         </AdminCardContent>
       </AdminCard>
     </div>

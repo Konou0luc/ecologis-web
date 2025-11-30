@@ -149,7 +149,7 @@ const Dashboard: React.FC = () => {
             const now = new Date();
             const diffMins = Math.floor((now.getTime() - billDate.getTime()) / 60000);
             
-            activities.push({
+          activities.push({
               id: `bill-${bill._id}`,
               type: 'bill',
               action: 'a créé une facture',
@@ -158,7 +158,7 @@ const Dashboard: React.FC = () => {
               timestamp: formatRelativeTime(bill.createdAt || bill.dateEmission),
               status: bill.statut === 'payée' ? 'success' : bill.statut === 'en_retard' ? 'error' : 'warning',
               isNew: index === 0 && diffMins < 15 // Mark as new if created less than 15 minutes ago
-            });
+          });
           });
         }
 
@@ -169,32 +169,32 @@ const Dashboard: React.FC = () => {
               ? `${consumption.residentId.prenom} ${consumption.residentId.nom}`
               : 'Utilisateur inconnu';
             
-            activities.push({
+          activities.push({
               id: `consumption-${consumption._id}`,
               type: 'consumption',
               action: 'a enregistré une consommation',
               user: userName,
               itemId: generateItemId(consumption._id, 'CON'),
               timestamp: formatRelativeTime(consumption.createdAt),
-              status: 'success'
-            });
+            status: 'success'
+          });
           });
         }
-
+        
         // Add user registration activities
         if (usersResponse.data?.users) {
           usersResponse.data.users.forEach((user) => {
             const userName = `${user.prenom} ${user.nom}`;
             
-            activities.push({
+          activities.push({
               id: `user-${user._id}`,
               type: 'user',
               action: 'a enregistré un nouvel utilisateur',
               user: userName,
               itemId: generateItemId(user._id, 'USR'),
               timestamp: formatRelativeTime(user.createdAt),
-              status: 'success'
-            });
+            status: 'success'
+          });
           });
         }
 
@@ -205,7 +205,7 @@ const Dashboard: React.FC = () => {
               ? `${house.proprietaireId.prenom} ${house.proprietaireId.nom}`
               : 'Propriétaire inconnu';
             
-            activities.push({
+          activities.push({
               id: `house-${house._id}`,
               type: 'house',
               action: 'a ajouté une nouvelle maison',
@@ -407,12 +407,12 @@ const Dashboard: React.FC = () => {
               {/* Value */}
               <div className="text-3xl font-bold text-gray-900 mb-2">
                 {stat.value}
-              </div>
+            </div>
               
               {/* Title */}
               <div className="text-sm font-medium text-gray-600 mb-4">
-                {stat.title}
-              </div>
+                  {stat.title}
+                </div>
               
               {/* Change Badge */}
               <div className="flex items-center gap-2">
@@ -432,82 +432,82 @@ const Dashboard: React.FC = () => {
             </div>
           );
         })}
-      </div>
+          </div>
 
       {/* Main Content Grid */}
       <div className="space-y-6">
         {/* Top Row: Chart and Side Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Revenue Chart */}
           <div className="lg:col-span-2">
-            <DashboardChart
-              title="Évolution des revenus"
-              description="Revenus mensuels sur les 12 derniers mois"
-              data={chartData}
-              type="bar"
-              dataKey="value"
-              color={adminTheme.colors.primary}
-              height={300}
-            />
-          </div>
+          <DashboardChart
+            title="Évolution des revenus"
+            description="Revenus mensuels sur les 12 derniers mois"
+            data={chartData}
+            type="bar"
+            dataKey="value"
+            color={adminTheme.colors.primary}
+            height={300}
+          />
+        </div>
 
-          {/* Right Column - 1/3 width */}
-          <div className="space-y-6">
-            {/* Alerts */}
+        {/* Right Column - 1/3 width */}
+        <div className="space-y-6">
+          {/* Alerts */}
             <AdminCard className="bg-white border border-gray-200">
               <AdminCardHeader className="pb-4">
                 <AdminCardTitle className="text-lg font-bold text-gray-900 text-left">Alertes</AdminCardTitle>
                 <AdminCardDescription className="text-sm text-gray-500 text-left mt-1">
-                  Notifications importantes
-                </AdminCardDescription>
-              </AdminCardHeader>
+                Notifications importantes
+              </AdminCardDescription>
+            </AdminCardHeader>
               <AdminCardContent className="pt-0">
                 <div className="space-y-3">
-                  {stats.factures.enRetard > 0 && (
+                {stats.factures.enRetard > 0 && (
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-[#FEF2F2] border border-[#FEE2E2]">
                       <AlertTriangle className="w-4 h-4 text-[#F44336] flex-shrink-0 mt-0.5" />
-                      <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-[#111827]">Factures en retard</p>
                         <p className="text-xs text-[#6B7280] mt-1">
-                          {stats.factures.enRetard} facture{stats.factures.enRetard > 1 ? 's' : ''} nécessitent une attention
-                        </p>
-                      </div>
+                        {stats.factures.enRetard} facture{stats.factures.enRetard > 1 ? 's' : ''} nécessitent une attention
+                      </p>
+                    </div>
                       <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#F44336] text-white text-xs font-bold flex-shrink-0">
                         {stats.factures.enRetard}
                       </span>
-                    </div>
-                  )}
+                  </div>
+                )}
 
-                  {stats.factures.enAttente > 0 && (
+                {stats.factures.enAttente > 0 && (
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-[#FFFBEB] border border-[#FEF3C7]">
                       <Clock className="w-4 h-4 text-[#FF9800] flex-shrink-0 mt-0.5" />
-                      <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-[#111827]">En attente</p>
                         <p className="text-xs text-[#6B7280] mt-1">
-                          {stats.factures.enAttente} facture{stats.factures.enAttente > 1 ? 's' : ''} en attente de paiement
-                        </p>
-                      </div>
+                        {stats.factures.enAttente} facture{stats.factures.enAttente > 1 ? 's' : ''} en attente de paiement
+                      </p>
+                    </div>
                       <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#FF9800] text-white text-xs font-bold flex-shrink-0">
                         {stats.factures.enAttente}
                       </span>
-                    </div>
-                  )}
+                  </div>
+                )}
 
                   <div className="flex items-start gap-3 p-3 rounded-lg bg-[#ECFDF5] border border-[#D1FAE5]">
                     <CheckCircle className="w-4 h-4 text-[#4CAF50] flex-shrink-0 mt-0.5" />
-                    <div className="flex-1 min-w-0">
+                  <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-[#111827]">Système opérationnel</p>
                       <p className="text-xs text-[#6B7280] mt-1">
-                        Tous les services fonctionnent normalement
-                      </p>
-                    </div>
+                      Tous les services fonctionnent normalement
+                    </p>
                   </div>
                 </div>
-              </AdminCardContent>
-            </AdminCard>
+              </div>
+            </AdminCardContent>
+          </AdminCard>
 
-            {/* Quick Stats */}
-            <QuickStatsCard stats={quickStats} />
+          {/* Quick Stats */}
+          <QuickStatsCard stats={quickStats} />
           </div>
         </div>
 

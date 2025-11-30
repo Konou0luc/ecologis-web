@@ -1,3 +1,43 @@
 # https://www.robotstxt.org/robotstxt.html
+# Robots.txt pour Ecopower
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /profile
+Disallow: /settings
+Disallow: /login
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://ecologis-web.vercel.app/sitemap.xml
+
+# Crawl-delay pour les robots polis
+User-agent: *
+Crawl-delay: 1
+
+# Autoriser les robots majeurs
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Interdire les robots malveillants
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
