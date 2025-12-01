@@ -10,16 +10,19 @@ const Pricing: React.FC = () => {
       type: 'basic',
       description: 'Idéal pour les petites propriétés',
       monthlyPrice: 500,
-      quarterlyPrice: 1500,
-      yearlyPrice: 6000,
-      savings: { quarterly: 0, yearly: 0 },
+      quarterlyPrice: 1350, // 10% de réduction
+      yearlyPrice: 5400, // 10% de réduction
+      savings: { quarterly: 10, yearly: 10 },
       features: [
         'Gestion jusqu\'à 5 résidents',
-        'Génération de factures automatique',
-        'Historique des consommations',
-        'Notifications WhatsApp',
-        'Support par email',
-        'Interface simple et intuitive'
+        'Génération automatique de factures',
+        'Enregistrement des relevés de compteur',
+        'Historique complet des consommations',
+        'Calcul automatique des montants (kWh × tarif)',
+        'Notifications WhatsApp automatiques',
+        'Messagerie en temps réel avec résidents',
+        'Tableau de bord avec statistiques',
+        'Support par email'
       ],
       popular: false
     },
@@ -27,17 +30,20 @@ const Pricing: React.FC = () => {
       name: 'Premium',
       type: 'premium',
       description: 'Parfait pour les propriétés moyennes',
-      monthlyPrice: 750,
-      quarterlyPrice: 2250,
-      yearlyPrice: 9000,
-      savings: { quarterly: 0, yearly: 0 },
+      monthlyPrice: 1000,
+      quarterlyPrice: 2700, // 10% de réduction
+      yearlyPrice: 10800, // 10% de réduction
+      savings: { quarterly: 10, yearly: 10 },
       features: [
         'Tout du plan Basic',
         'Gestion jusqu\'à 15 résidents',
-        'Statistiques avancées',
-        'Support prioritaire 24/7',
-        'Rapports personnalisés',
-        'API d\'intégration',
+        'Statistiques avancées et graphiques',
+        'Export des données (PDF, Excel)',
+        'Rappels automatiques de paiement',
+        'Suivi des factures en retard',
+        'Messagerie de groupe par maison',
+        'Notifications push en temps réel',
+        'Support prioritaire',
         'Formation incluse'
       ],
       popular: true
@@ -46,19 +52,18 @@ const Pricing: React.FC = () => {
       name: 'Enterprise',
       type: 'enterprise',
       description: 'Pour les grandes propriétés',
-      monthlyPrice: 1050,
-      quarterlyPrice: 3150,
-      yearlyPrice: 12600,
-      savings: { quarterly: 0, yearly: 0 },
+      monthlyPrice: 2000,
+      quarterlyPrice: 5400, // 10% de réduction
+      yearlyPrice: 21600, // 10% de réduction
+      savings: { quarterly: 10, yearly: 10 },
       features: [
         'Tout du plan Premium',
         'Gestion jusqu\'à 50 résidents',
-        'API personnalisée',
-        'Formation personnalisée',
-        'Manager dédié',
-        'Intégrations avancées',
-        'Support téléphonique',
-        'SLA garanti'
+        'Gestion multi-propriétaires',
+        'Support téléphonique ',
+        'Gestionnaire de compte ',
+        'Personnalisation de l\'interface',
+        'Intégrations avec systèmes externes'
       ],
       popular: false
     }
