@@ -18,9 +18,9 @@ const LegalInfo: React.FC = () => {
           </p>
         </div>
 
-        {/* Company Information */}
+        {/* Developer Information */}
         <div className="legal-section">
-          <h2>Informations de l'Entreprise</h2>
+          <h2>Informations du Développeur</h2>
           <div className="info-grid">
             <div className="info-card">
               <Globe className="icon" />
@@ -30,7 +30,7 @@ const LegalInfo: React.FC = () => {
             <div className="info-card">
               <Users className="icon" />
               <h3>Développeur</h3>
-              <p>Ecopower Technologies</p>
+              <p>KONOU Komla Luc</p>
             </div>
             <div className="info-card">
               <MapPin className="icon" />
@@ -83,13 +83,12 @@ const LegalInfo: React.FC = () => {
               <h3>Description Longue (4000 caractères max)</h3>
               <div className="app-long-desc">
                 <p>
-                  <strong>Ecopower - Révolutionnez votre gestion d'énergie</strong>
+                  <strong>Ecopower - Simplifiez votre gestion d'énergie</strong>
                 </p>
                 <p>
-                  Ecopower est la solution complète qui transforme votre gestion de consommation électrique 
-                  en avantage concurrentiel. Conçue spécialement pour les propriétaires et gestionnaires 
-                  de biens immobiliers au Togo, notre application mobile vous offre un contrôle total sur 
-                  votre consommation énergétique.
+                  Ecopower est une application mobile conçue pour simplifier la gestion de consommation électrique. 
+                  Développée pour les propriétaires et gestionnaires de biens immobiliers au Togo, 
+                  cette solution vous permet de suivre et gérer facilement votre consommation énergétique.
                 </p>
                 <p>
                   <strong>Fonctionnalités principales :</strong>
@@ -107,22 +106,21 @@ const LegalInfo: React.FC = () => {
                   <strong>Avantages :</strong>
                 </p>
                 <ul>
-                  <li>300% ROI moyen dès les premières semaines</li>
-                  <li>85% de gain de temps sur la gestion administrative</li>
-                  <li>99.9% de disponibilité garantie</li>
-                  <li>Déploiement en 24h</li>
+                  <li>Gain de temps sur la gestion administrative</li>
+                  <li>Interface simple et intuitive</li>
+                  <li>Génération automatique de factures</li>
+                  <li>Suivi en temps réel de la consommation</li>
                 </ul>
                 <p>
                   <strong>Plans d'abonnement :</strong>
                 </p>
                 <ul>
-                  <li>Basic : 166 FCFA/mois - Idéal pour petites propriétés</li>
-                  <li>Premium : 650 FCFA/mois - Parfait pour propriétés moyennes</li>
-                  <li>Enterprise : 800 FCFA/mois - Pour grandes propriétés</li>
+                  <li>Basic : 500 FCFA/mois - Jusqu'à 5 résidents</li>
+                  <li>Premium : 1000 FCFA/mois - Jusqu'à 15 résidents</li>
+                  <li>Enterprise : 2000 FCFA/mois - Jusqu'à 50 résidents</li>
                 </ul>
                 <p>
-                  Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecopower. 
-                  Téléchargez maintenant et transformez votre gestion énergétique !
+                  Téléchargez Ecopower dès maintenant et simplifiez votre gestion énergétique au quotidien !
                 </p>
               </div>
             </div>

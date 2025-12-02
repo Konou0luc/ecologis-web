@@ -91,7 +91,7 @@ export const generateOrganizationSchema = (): OrganizationSchema => ({
   name: "Ecopower",
   url: SITE_URL,
   logo: `${SITE_URL}/logo512.png`,
-  description: "Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo.",
+  description: "Application simple et efficace pour gérer votre consommation électrique au Togo.",
   contactPoint: {
     "@type": "ContactPoint",
     telephone: "+228-98-75-45-25",
@@ -116,7 +116,7 @@ export const generateWebSiteSchema = (): WebSiteSchema => ({
   "@type": "WebSite",
   name: "Ecopower",
   url: SITE_URL,
-  description: "Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo.",
+  description: "Application simple et efficace pour gérer votre consommation électrique au Togo.",
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -161,7 +161,7 @@ export const generateHomePageSchema = () => {
   const website = generateWebSiteSchema();
   const webpage = generateWebPageSchema(
     "Ecopower - Gestion de Consommation Électrique",
-    "Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo. Suivez votre consommation, générez des factures automatiquement et optimisez vos coûts énergétiques.",
+    "Application simple et efficace pour gérer votre consommation électrique au Togo. Suivez vos relevés, générez vos factures automatiquement et gardez le contrôle sur vos dépenses.",
     "/"
   );
   

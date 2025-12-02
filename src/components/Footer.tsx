@@ -19,9 +19,7 @@ const Footer: React.FC = () => {
     ],
     company: [
       { name: 'À propos', href: '#' },
-      { name: 'Blog', href: '#' },
-      { name: 'Carrières', href: '#' },
-      { name: 'Presse', href: '#' }
+      { name: 'Guide d\'utilisation', href: '/guide' }
     ],
     legal: [
       { name: 'Confidentialité', href: '/privacy-policy' },
@@ -66,8 +64,8 @@ const Footer: React.FC = () => {
                 lineHeight: '1.6',
                 textAlign: 'left'
               }}>
-                La solution nouvelle génération pour révolutionner votre gestion 
-                de consommation électrique et optimiser vos coûts énergétiques.
+                Une application simple et efficace pour gérer votre consommation électrique. 
+                Développée avec passion pour vous faciliter la vie au quotidien.
               </p>
               
               {/* Contact Info */}
@@ -157,7 +155,7 @@ const Footer: React.FC = () => {
                 marginBottom: '24px',
                 margin: 0,
                 textAlign: 'left'
-              }}>Entreprise</h3>
+              }}>À propos</h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {footerLinks.company.map((link, index) => (
                   <li key={index} style={{ marginBottom: '12px' }}>

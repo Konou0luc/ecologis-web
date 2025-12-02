@@ -136,13 +136,13 @@ function App() {
               <>
                 <SEO
                   title="Informations Légales | Ecopower"
-                  description="Informations légales et mentions légales d'Ecopower. Coordonnées de l'entreprise, numéro SIRET, adresse, directeur de publication et hébergeur."
+                  description="Informations légales et mentions légales d'Ecopower. Coordonnées du développeur, adresse et informations de contact."
                   canonical="/legal-info"
                   keywords="informations légales, mentions légales, entreprise, contact, Ecopower, Togo"
                   jsonLd={[
                     generateWebPageSchema(
                       "Informations Légales - Ecopower",
-                      "Informations légales et mentions légales d'Ecopower. Coordonnées de l'entreprise, numéro SIRET, adresse, directeur de publication.",
+                      "Informations légales et mentions légales d'Ecopower. Coordonnées du développeur, adresse et informations de contact.",
                       "/legal-info"
                     ),
                     generateBreadcrumbSchema([
@@ -192,7 +192,7 @@ function App() {
               <>
                 <SEO
                   title="Ecopower - Gestion de Consommation Électrique | Solution Intelligente au Togo"
-                  description="Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo. Suivez votre consommation en temps réel, générez des factures automatiquement, optimisez vos coûts énergétiques avec Ecopower."
+                  description="Application simple et efficace pour gérer votre consommation électrique au Togo. Suivez vos relevés, générez vos factures automatiquement et gardez le contrôle sur vos dépenses."
                   canonical="/"
                   keywords="ecopower, gestion électrique, factures, consommation, énergie, Togo, Lomé, gestion résidentielle, suivi consommation, facturation automatique, gestion énergétique, économie d'énergie, consommation électrique Togo"
                   jsonLd={generateHomePageSchema()}
@@ -214,7 +214,7 @@ function App() {
               <>
                 <SEO
                   title="Ecopower - Gestion de Consommation Électrique | Solution Intelligente au Togo"
-                  description="Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo. Suivez votre consommation en temps réel, générez des factures automatiquement, optimisez vos coûts énergétiques avec Ecopower."
+                  description="Application simple et efficace pour gérer votre consommation électrique au Togo. Suivez vos relevés, générez vos factures automatiquement et gardez le contrôle sur vos dépenses."
                   canonical="/"
                   keywords="ecopower, gestion électrique, factures, consommation, énergie, Togo, Lomé"
                 />

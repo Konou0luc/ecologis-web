@@ -59,11 +59,9 @@ const Pricing: React.FC = () => {
       features: [
         'Tout du plan Premium',
         'Gestion jusqu\'à 50 résidents',
-        'Gestion multi-propriétaires',
-        'Support téléphonique ',
-        'Gestionnaire de compte ',
-        'Personnalisation de l\'interface',
-        'Intégrations avec systèmes externes'
+        'Support prioritaire par email',
+        'Assistance personnalisée',
+        'Demandes de fonctionnalités prioritaires'
       ],
       popular: false
     }

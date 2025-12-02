@@ -45,8 +45,8 @@ const Features: React.FC = () => {
     },
     {
       icon: Shield,
-      title: 'Sécurité Professionnelle',
-      description: 'Protection maximale de vos données avec chiffrement avancé et conformité RGPD garantie.',
+      title: 'Sécurité des Données',
+      description: 'Vos données sont protégées avec des mesures de sécurité appropriées.',
       color: '#6366f1'
     },
     {
@@ -91,7 +91,7 @@ const Features: React.FC = () => {
             margin: '0 auto',
             lineHeight: '1.6'
           }}>
-            Des outils intelligents qui s'adaptent à votre business et évoluent avec vos besoins
+            Des fonctionnalités pratiques conçues pour simplifier votre gestion quotidienne
           </p>
         </div>
 
@@ -202,7 +202,7 @@ const Features: React.FC = () => {
                 margin: '0 0 16px 0',
                 lineHeight: '1.3'
               }}>
-                Prêt à transformer votre gestion d'énergie ?
+                Prêt à simplifier votre gestion d'énergie ?
               </h3>
               <p style={{ 
                 color: 'var(--color-text-secondary)', 
@@ -211,7 +211,7 @@ const Features: React.FC = () => {
                 fontSize: 'clamp(16px, 2.5vw, 18px)',
                 margin: '0 0 32px 0'
               }}>
-                Rejoignez les propriétaires qui ont déjà fait le choix de l'excellence avec Ecopower.
+                Commencez dès aujourd'hui et découvrez comment Ecopower peut vous faciliter la vie.
               </p>
               <div className="features-cta-buttons">
                 <button className="btn-primary" style={{

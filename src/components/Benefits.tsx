@@ -14,29 +14,29 @@ const Benefits: React.FC = () => {
   const benefits = [
     {
       icon: TrendingUp,
-      title: '300% ROI Moyen',
-      description: 'Retour sur investissement visible dès les premières semaines',
+      title: 'Gain de Temps',
+      description: 'Automatisation des tâches répétitives de gestion',
       color: '#10b981',
       bgColor: 'rgba(16, 185, 129, 0.15)'
     },
     {
       icon: Clock,
-      title: '85% Gain Temps',
-      description: 'Automatisation complète des tâches de gestion',
+      title: 'Simplicité',
+      description: 'Interface intuitive, facile à prendre en main',
       color: '#FFA800',
       bgColor: 'rgba(255, 168, 0, 0.15)'
     },
     {
       icon: Shield,
-      title: '99.9% Disponibilité',
-      description: 'Service fiable avec monitoring 24/7',
+      title: 'Fiabilité',
+      description: 'Application stable et sécurisée',
       color: '#8b5cf6',
       bgColor: 'rgba(139, 92, 246, 0.15)'
     },
     {
       icon: Zap,
-      title: '24h Déploiement',
-      description: 'Configuration rapide et mise en service immédiate',
+      title: 'Rapidité',
+      description: 'Configuration simple et mise en service rapide',
       color: '#FFA800',
       bgColor: 'rgba(255, 168, 0, 0.15)'
     }
@@ -63,8 +63,8 @@ const Benefits: React.FC = () => {
     },
     {
       icon: Users,
-      title: 'Accompagnement expert',
-      description: 'Équipe dédiée avec support garanti et formation sur mesure',
+      title: 'Support réactif',
+      description: 'Assistance disponible par email pour répondre à vos questions',
       color: '#8b5cf6'
     }
   ];
@@ -92,7 +92,7 @@ const Benefits: React.FC = () => {
             margin: '0 auto',
             lineHeight: '1.6'
           }}>
-            Rejoignez les propriétaires leaders qui ont déjà fait le choix de l'excellence avec Ecopower
+            Une solution simple et efficace pour gérer votre consommation électrique au quotidien
           </p>
         </div>
 
@@ -244,7 +244,7 @@ const Benefits: React.FC = () => {
                 marginBottom: '24px',
                 margin: 0
               }}>
-                Découvrez la puissance de l'innovation
+                Une solution pensée pour vous
               </h3>
               <p style={{ 
                 fontSize: '18px', 
@@ -253,9 +253,9 @@ const Benefits: React.FC = () => {
                 margin: '0 0 24px 0',
                 lineHeight: '1.6'
               }}>
-                Ecopower révolutionne votre gestion de consommation électrique. 
-                La plateforme suit vos tendances, anticipe vos besoins et vous aide 
-                à prendre les bonnes décisions au bon moment.
+                Ecopower simplifie votre gestion de consommation électrique. 
+                Suivez vos consommations, générez vos factures automatiquement 
+                et gardez le contrôle sur vos dépenses énergétiques.
               </p>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -348,7 +348,7 @@ const Benefits: React.FC = () => {
                 <div className="team-image-container">
                   <img 
                     src="/assets/screens/people-office-work-day.jpg" 
-                    alt="Équipe Ecopower - Experts en gestion d'énergie"
+                    alt="Ecopower - Application de gestion d'énergie"
                     className="team-image"
                     loading="lazy"
                     onError={(e) => {
@@ -361,9 +361,9 @@ const Benefits: React.FC = () => {
                     }}
                   />
                   <div className="team-image-placeholder" style={{ display: 'none' }}>
-                    <div className="team-icon">👥</div>
-                    <div className="team-title">Équipe Ecopower</div>
-                    <div className="team-subtitle">Experts en gestion d'énergie</div>
+                    <div className="team-icon">⚡</div>
+                    <div className="team-title">Ecopower</div>
+                    <div className="team-subtitle">Gestion d'énergie simplifiée</div>
                   </div>
                 </div>
               </div>
@@ -371,25 +371,26 @@ const Benefits: React.FC = () => {
               {/* Content Column */}
               <div className="team-content-column">
                 <h3 className="team-title-main">
-                  Une équipe{' '}
-                  <span className="team-title-highlight">passionnée</span>
+                  Un projet{' '}
+                  <span className="team-title-highlight">passionné</span>
                 </h3>
                 
                 <p className="team-description">
-                  Derrière Ecopower se trouve une équipe d'experts passionnés par l'innovation 
-                  et dédiés à votre succès. Nos développeurs, analystes et consultants travaillent 
-                  sans relâche pour vous offrir la meilleure expérience possible et un support exceptionnel.
+                  Ecopower est né d'une passion pour la technologie et le besoin de simplifier 
+                  la gestion de consommation électrique. Développé avec soin, cette application 
+                  évolue constamment pour mieux répondre à vos besoins. Votre feedback est précieux 
+                  pour améliorer l'expérience utilisateur.
                 </p>
                 
                 {/* Stats Cards */}
                 <div className="team-stats-grid">
                   <div className="team-stat-card">
-                    <div className="team-stat-number">10+</div>
-                    <div className="team-stat-label">Années d'expérience</div>
+                    <div className="team-stat-number">100%</div>
+                    <div className="team-stat-label">Dédié à votre satisfaction</div>
                   </div>
                   <div className="team-stat-card">
-                    <div className="team-stat-number">24/7</div>
-                    <div className="team-stat-label">Support disponible</div>
+                    <div className="team-stat-number">Réactif</div>
+                    <div className="team-stat-label">Support par email</div>
                   </div>
                 </div>
               </div>

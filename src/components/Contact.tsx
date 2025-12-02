@@ -11,8 +11,8 @@ const Contact: React.FC = () => {
             Contactez-nous
           </h1>
           <p className="contact-description">
-            Prêt à révolutionner votre gestion énergétique ? Notre équipe d'experts 
-            est là pour vous accompagner dans votre transition vers une consommation plus intelligente.
+            Une question ? Une suggestion ? N'hésitez pas à me contacter. 
+            Je serai ravi de vous aider et d'améliorer l'application selon vos besoins.
           </p>
         </div>
 

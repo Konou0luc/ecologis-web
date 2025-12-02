@@ -34,8 +34,8 @@ const Hero: React.FC = () => {
                 margin: 0,
                 textAlign: 'left'
               }} className="hero-description">
-                La solution complète qui transforme votre gestion de consommation électrique 
-                en avantage concurrentiel. Simple, puissant, intelligent.
+                Une application simple et efficace pour gérer votre consommation électrique. 
+                Suivez vos relevés, générez vos factures et gardez le contrôle sur vos dépenses.
               </p>
             </div>
 
@@ -47,16 +47,16 @@ const Hero: React.FC = () => {
               padding: '24px 0',
             }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>50+</div>
-                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>Propriétés</div>
+                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>Simple</div>
+                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>À utiliser</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>99.9%</div>
-                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>Disponibilité</div>
+                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>Rapide</div>
+                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>À configurer</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>24/7</div>
-                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>Support</div>
+                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>Efficace</div>
+                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>Au quotidien</div>
               </div>
             </div>
 

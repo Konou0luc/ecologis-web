@@ -14,7 +14,7 @@ interface SEOProps {
 
 const SEO: React.FC<SEOProps> = ({
   title = 'Ecopower - Gestion de Consommation Électrique',
-  description = 'Solution complète de gestion de consommation électrique pour les résidences et entreprises au Togo. Suivez votre consommation, générez des factures automatiquement et optimisez vos coûts énergétiques.',
+  description = 'Application simple et efficace pour gérer votre consommation électrique au Togo. Suivez vos relevés, générez vos factures automatiquement et gardez le contrôle sur vos dépenses.',
   canonical,
   ogImage = '/assets/screens/Ecopower.jpg',
   ogType = 'website',

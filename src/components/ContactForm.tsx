@@ -104,7 +104,7 @@ const ContactForm: React.FC = () => {
       icon: Phone,
       title: 'Téléphone',
       content: '+228 97240460',
-      description: 'Lun-Ven 8h-18h'
+      description: 'Disponible sur WhatsApp'
     },
     {
       icon: Mail,
@@ -116,7 +116,7 @@ const ContactForm: React.FC = () => {
       icon: MapPin,
       title: 'Adresse',
       content: 'Lomé, Togo',
-      description: 'Bureau principal'
+      description: 'Basé à Lomé'
     }
   ];
 
@@ -128,7 +128,7 @@ const ContactForm: React.FC = () => {
           Message envoyé avec succès !
         </h2>
         <p>
-          Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais.
+          Merci pour votre message. Je vous répondrai dans les plus brefs délais.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
