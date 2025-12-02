@@ -47,16 +47,16 @@ const Hero: React.FC = () => {
               padding: '24px 0',
             }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>Simple</div>
-                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>À utiliser</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FFA800' }}>Simple</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>À utiliser</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>Rapide</div>
-                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>À configurer</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FFA800' }}>Rapide</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>À configurer</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#FFA800' }}>Efficace</div>
-                <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>Au quotidien</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FFA800' }}>Efficace</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>Au quotidien</div>
               </div>
             </div>
 
@@ -173,7 +173,7 @@ const Hero: React.FC = () => {
               </div>
             </div>
             
-            {/* Floating elements */}
+            {/* Floating elements - Hidden on mobile */}
             <div style={{ 
               position: 'absolute', 
               top: '-16px', 
@@ -184,7 +184,7 @@ const Hero: React.FC = () => {
               borderRadius: '50%', 
               boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
               animation: 'bounce 2s infinite'
-            }}>
+            }} className="floating-element-mobile-hidden">
               <CheckCircle size={24} />
             </div>
             <div style={{ 
@@ -198,7 +198,7 @@ const Hero: React.FC = () => {
               boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
               animation: 'bounce 2s infinite',
               animationDelay: '1s'
-            }}>
+            }} className="floating-element-mobile-hidden">
               <ArrowRight size={24} />
             </div>
           </div>

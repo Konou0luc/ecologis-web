@@ -180,8 +180,12 @@ const Pricing: React.FC = () => {
                   position: 'absolute', 
                   top: '-16px', 
                   left: '50%', 
-                  transform: 'translateX(-50%)' 
-                }}>
+                  transform: 'translateX(-50%)',
+                  width: '100%',
+                  maxWidth: 'calc(100% - 32px)',
+                  padding: '0 16px',
+                  boxSizing: 'border-box'
+                }} className="pricing-badge-container">
                   <div style={{ 
                     backgroundColor: '#FFA800', 
                     color: 'white', 
@@ -191,7 +195,9 @@ const Pricing: React.FC = () => {
                     fontWeight: '600',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px'
+                    gap: '4px',
+                    width: 'fit-content',
+                    margin: '0 auto'
                   }}>
                     <Star size={16} />
                     <span>POPULAIRE</span>

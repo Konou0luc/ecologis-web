@@ -321,7 +321,7 @@ const Benefits: React.FC = () => {
                 </div>
               </div>
               
-              {/* Floating elements */}
+              {/* Floating elements - Hidden on mobile */}
               <div style={{ 
                 position: 'absolute', 
                 top: '-8px', 
@@ -332,7 +332,7 @@ const Benefits: React.FC = () => {
                 borderRadius: '50%', 
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                 animation: 'bounce 2s infinite'
-              }}>
+              }} className="floating-element-mobile-hidden">
                 <TrendingUp size={16} />
               </div>
             </div>

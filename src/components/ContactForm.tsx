@@ -81,9 +81,36 @@ const ContactForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Déterminer l'URL de l'API
+      const apiUrl = process.env.REACT_APP_API_URL || 'https://ecopower-api.vercel.app';
       
+      // Envoyer le message au backend
+      const response = await fetch(`${apiUrl}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Gérer les erreurs de validation
+        if (data.errors) {
+          setErrors(data.errors);
+          return;
+        }
+        throw new Error(data.message || 'Erreur lors de l\'envoi du message');
+      }
+
+      // Succès
       setIsSubmitted(true);
       setFormData({
         name: '',
@@ -92,8 +119,13 @@ const ContactForm: React.FC = () => {
         subject: '',
         message: ''
       });
-    } catch (error) {
+      setErrors({});
+    } catch (error: any) {
       console.error('Erreur lors de l\'envoi:', error);
+      // Afficher un message d'erreur générique
+      setErrors({
+        message: error.message || 'Erreur lors de l\'envoi du message. Veuillez réessayer.'
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -272,6 +304,13 @@ const ContactForm: React.FC = () => {
               </p>
             )}
           </div>
+
+          {/* Error message général */}
+          {errors.message && typeof errors.message === 'string' && errors.message !== 'Le message est requis' && errors.message.length > 50 && (
+            <div className="form-error" style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#fee', border: '1px solid #fcc', borderRadius: '4px' }}>
+              {errors.message}
+            </div>
+          )}
 
           {/* Submit Button */}
           <button

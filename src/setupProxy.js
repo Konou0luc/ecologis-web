@@ -3,7 +3,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = function(app) {
   // Proxy pour toutes les routes API
   app.use(
-    ['/auth', '/admin'],
+    ['/auth', '/admin', '/contact'],
     createProxyMiddleware({
       target: 'https://ecopower-api.vercel.app',
       changeOrigin: true,
